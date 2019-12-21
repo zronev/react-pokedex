@@ -1,43 +1,7 @@
-import { LOADING, SET_DATA, LOADING_ERROR } from '../actions'
+import { combineReducers } from 'redux'
+import { getAsyncDataReducer } from './getAsyncDataReducer'
 
-const initialState = {
-  isLoading: false,
-  loadError: false,
-  loadErrorDetails: null,
-  payload: null,
-}
+const pokemons = getAsyncDataReducer('pokemons')
+const pokemon = getAsyncDataReducer('pokemon')
 
-// Reducer creator
-export const getAsyncDataReducer = stateProperty => {
-  const reducer = (state = initialState, action) => {
-    switch (action.type) {
-      case LOADING(stateProperty):
-        return {
-          ...state,
-          isLoading: true,
-          loadErrorDetails: null,
-        }
-
-      case SET_DATA(stateProperty):
-        return {
-          ...state,
-          isLoading: false,
-          loadErrorDetails: null,
-          payload: action.payload,
-        }
-
-      case LOADING_ERROR(stateProperty):
-        return {
-          ...state,
-          isLoading: false,
-          loadError: true,
-          loadErrorDetails: action.payload,
-        }
-
-      default:
-        return state
-    }
-  }
-
-  return reducer
-}
+export const rootReducer = combineReducers({ pokemons, pokemon })

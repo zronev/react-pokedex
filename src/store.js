@@ -1,8 +1,5 @@
-import { getAsyncDataReducer } from './reducers'
-import { createStore, combineReducers } from 'redux'
-
-const pokemons = getAsyncDataReducer('pokemons')
-const rootReducer = combineReducers({ pokemons })
+import { createStore } from 'redux'
+import { rootReducer } from './reducers'
 
 export const store = createStore(
   rootReducer,
