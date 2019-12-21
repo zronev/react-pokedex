@@ -14,11 +14,8 @@ export const useAsyncState = (stateProperty, loader) => {
   useEffect(() => {
     const load = async () => {
       try {
-        console.log('hi!')
         const result = await loader
-        console.log(mounted.current)
-        console.log(result)
-        mounted.current && dispatch(dataSetDataAction(stateProperty, result.pokemons))
+        mounted.current && dispatch(dataSetDataAction(stateProperty, result))
         return result
       } catch (e) {
         mounted.current && dispatch(dataLoadingErrorAction(stateProperty, e))
