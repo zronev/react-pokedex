@@ -1,21 +1,30 @@
-import React, { useCallback, useEffect } from 'react'
-import { getPokemons } from '../modules/getPokemons'
+import React, { useCallback } from 'react'
+import { getPokemon } from '../modules/getPokemon'
+import { useSelector } from 'react-redux'
 import { useAsyncState } from '../custom hooks/useAsyncState'
+import Spinner from './Spinner'
+import Pokemon from './Pokemon'
+import ArrowLeft from './ArrowLeft'
+import ArrowRight from './ArrowRight'
 
 const Pokedex = () => {
-  const loader = useCallback(getPokemons(), [])
-  console.log(loader)
-  const { payload, isLoading, loadError } = useAsyncState('pokemons', loader)
+  const id = useSelector(state => state.id)
 
-  useEffect(() => {
-    console.log(payload, isLoading, loadError)
-  }, [payload, isLoading, loadError])
+  const loader = useCallback(getPokemon(id), [id])
+  const { payload, isLoading, loadError } = useAsyncState('pokemon', loader)
 
   return (
     <div>
-      {payload && payload.count ? payload.count : null}
+      {console.log('payload: ', payload)}
+      {payload && payload.pokemon ? (
+        <>
+          <ArrowLeft />
+          <ArrowRight />
+          <Pokemon pokemon={payload.pokemon} />
+        </>
+      ) : null}
       {loadError && <p>Load Error</p>}
-      {isLoading && <p>Loading...</p>}
+      {isLoading && <Spinner />}
     </div>
   )
 }

@@ -17,3 +17,14 @@ export const dataLoadingErrorAction = (stateProperty, error) => ({
   type: LOADING_ERROR(stateProperty),
   payload: error,
 })
+
+// Actions
+export const nextPokemon = id => ({
+  type: 'NEXT_POKEMON',
+  payload: id,
+})
+
+export const prevPokemon = id => ({
+  type: 'PREV_POKEMON',
+  payload: id,
+})
