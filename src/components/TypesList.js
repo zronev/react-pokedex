@@ -3,7 +3,7 @@ import TypesItem from './TypesItem'
 
 const TypesList = ({ types }) => {
   return (
-    <ul>
+    <ul className="types pokemon__types">
       {types.map((type, index) => (
         <TypesItem key={index} type={type.type} />
       ))}
