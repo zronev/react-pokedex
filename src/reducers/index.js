@@ -1,8 +1,14 @@
 import { combineReducers } from 'redux'
 import { getAsyncDataReducer } from './getAsyncDataReducer'
 import { pokemonIDReducer } from './pokemonIDReducer'
+import { chooseChartTypeReducer } from './chooseChartTypeReducer'
 
 const pokemons = getAsyncDataReducer('pokemons')
 const pokemon = getAsyncDataReducer('pokemon')
 
-export const rootReducer = combineReducers({ pokemons, pokemon, id: pokemonIDReducer })
+export const rootReducer = combineReducers({
+  pokemons,
+  pokemon,
+  id: pokemonIDReducer,
+  chartType: chooseChartTypeReducer,
+})

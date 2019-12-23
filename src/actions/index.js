@@ -28,3 +28,7 @@ export const prevPokemon = id => ({
   type: 'PREV_POKEMON',
   payload: id,
 })
+
+export const toggleChartType = () => ({
+  type: 'TOGGLE_CHART_TYPE',
+})
