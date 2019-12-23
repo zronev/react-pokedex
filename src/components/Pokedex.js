@@ -15,11 +15,12 @@ const Pokedex = () => {
 
   return (
     <div>
-      {console.log('payload: ', payload)}
       {payload && payload.pokemon ? (
         <>
-          <ArrowLeft />
-          <ArrowRight />
+          <div className="arrows">
+            <ArrowLeft />
+            <ArrowRight />
+          </div>
           <Pokemon pokemon={payload.pokemon} />
         </>
       ) : null}
