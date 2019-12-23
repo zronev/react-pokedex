@@ -1,0 +1,30 @@
+body
+  color: $main-color
+  font-family: 'Open Sans', Arial, sans-serif
+
+ul
+  padding: 0
+  margin: 0
+
+li
+  list-style: none
+
+
+::selection
+  background: $prime-color
+  color: white
+
+::-webkit-scrollbar
+  width: 8px
+
+::-webkit-scrollbar-track
+  box-shadow: inset 0 0 3px $shadow-color
+  border-radius: $border-radius
+
+::-webkit-scrollbar-thumb
+  background: $prime-color
+  border-radius: $border-radius
+  box-shadow: inset 0 0 3px $shadow-color
+
+::-webkit-scrollbar:hover
+  background: $shadow-color

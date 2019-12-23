@@ -1,0 +1,26 @@
+.pokedex
+  display: grid
+  grid-template-columns: auto 1fr auto
+  grid-template-rows: auto 1fr
+
+  &__search-form
+    grid-column: 2 / 3
+    margin: 1rem 0
+    
+  &__pokemon
+    grid-column: 2
+    grid-row: 2
+
+  &__counter
+    grid-column: 2
+    grid-row: 1
+
+    justify-self: center
+
+  &__arrow-left
+    grid-column: 1
+    grid-row: 2
+
+  &__arrow-right
+    grid-column: 3
+    grid-row: 2
