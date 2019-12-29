@@ -2,6 +2,9 @@ import { combineReducers } from 'redux'
 import { getAsyncDataReducer } from './getAsyncDataReducer'
 import { pokemonIDReducer } from './pokemonIDReducer'
 import { chooseChartTypeReducer } from './chooseChartTypeReducer'
+import { toggleAnimationReducer } from './toggleAnimation'
+import { setNameReducer } from './setNameReducer'
+import { switchSideReducer } from './switchSideReducer'
 
 const pokemons = getAsyncDataReducer('pokemons')
 const pokemon = getAsyncDataReducer('pokemon')
@@ -14,5 +17,8 @@ export const rootReducer = combineReducers({
   species,
   evolutionChain,
   id: pokemonIDReducer,
+  name: setNameReducer,
   chartType: chooseChartTypeReducer,
+  animation: toggleAnimationReducer,
+  side: switchSideReducer,
 })

@@ -29,6 +29,24 @@ export const prevPokemon = id => ({
   payload: id,
 })
 
+export const setId = id => ({
+  type: 'SET_ID',
+  payload: id
+})
+
 export const toggleChartType = () => ({
   type: 'TOGGLE_CHART_TYPE',
+})
+
+export const toggleAnimation = () => ({
+  type: 'TOGGLE_ANIMATION',
+})
+
+export const setName = name => ({
+  type: 'SET_NAME',
+  payload: name,
+})
+
+export const switchSide = () => ({
+  type: 'SWITCH_SIDE'
 })
