@@ -1,8 +1,24 @@
 .button
-    color: white
-    background: $second-color
+  color: $main-color
+  background: $button-default-color
 
-    padding: 0.35rem 0.6rem
+  cursor: pointer
 
-    border: 2px solid transparent
-    border-radius: $border-radius
+  padding: 0.35rem 0.6rem
+
+  border: 2px solid transparent
+  border-radius: $border-radius
+
+  box-shadow: 0 1px 5px rgba(0,0,0,0.3)
+
+  &--switch
+    color: $switch-color
+    background: transparent
+
+    box-shadow: none
+    border: none
+
+    transition: all 0.3s
+
+    &:hover
+      color: $prime-color
