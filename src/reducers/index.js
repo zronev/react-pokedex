@@ -11,6 +11,7 @@ const evolutionChain = getAsyncDataReducer('evolutionChain')
 const chartType = toggleDataReducer('chartType')
 const side = toggleDataReducer('side')
 const animation = toggleDataReducer('animation')
+const menu = toggleDataReducer('menu')
 
 export const rootReducer = combineReducers({
   pokemons,
@@ -19,6 +20,7 @@ export const rootReducer = combineReducers({
   evolutionChain,
   id: pokemonIDReducer,
   name: setNameReducer,
+  menu,
   chartType,
   animation,
   side,
