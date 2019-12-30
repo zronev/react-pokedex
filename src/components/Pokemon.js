@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
-import { toggleChartType } from '../actions'
+import { toggleChartType, dataToggleAction } from '../actions'
 import { getSpecies } from '../modules/getSpecies'
 import { useAsyncState } from '../custom hooks/useAsyncState'
 
@@ -22,19 +22,22 @@ const Pokemon = ({ pokemon }) => {
   const { payload, isLoading, loadError } = useAsyncState('species', loader)
 
   const handleClick = () => {
-    dispatch(toggleChartType())
+    dispatch(dataToggleAction('chartType'))
   }
 
   return (
     <section className="pokemon">
-      <p className="pokemon__name">{name}</p>
-      <span className="pokemon__id">{id}</span>
-      <Sprite url={sprites.front_default} />
+      <p className="pokemon__name">
+        <span className="pokemon__id">{id}</span>
+        {` ${name}`}
+      </p>
+
+      <Sprite sprites={sprites} />
 
       <AbilitiesList abilities={abilities} />
       <TypesList types={types} />
 
-      <button className="toggle-type pokemon__toggle-type" onClick={handleClick}>
+      <button className="button toggle-type pokemon__toggle-type" onClick={handleClick}>
         Toggle Type
       </button>
 

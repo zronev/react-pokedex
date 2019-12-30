@@ -1,6 +1,7 @@
 export const LOADING = stateProperty => `${stateProperty}_LOADING`
 export const SET_DATA = stateProperty => `${stateProperty}_SET_DATA`
 export const LOADING_ERROR = stateProperty => `${stateProperty}_LOADING_ERROR`
+export const TOGGLE = stateProperty => `TOGGLE_${stateProperty}`
 
 // Action creators
 export const dataLoadingAction = stateProperty => ({
@@ -18,6 +19,10 @@ export const dataLoadingErrorAction = (stateProperty, error) => ({
   payload: error,
 })
 
+export const dataToggleAction = stateProperty => ({
+  type: TOGGLE(stateProperty),
+})
+
 // Actions
 export const nextPokemon = id => ({
   type: 'NEXT_POKEMON',
@@ -31,22 +36,10 @@ export const prevPokemon = id => ({
 
 export const setId = id => ({
   type: 'SET_ID',
-  payload: id
-})
-
-export const toggleChartType = () => ({
-  type: 'TOGGLE_CHART_TYPE',
-})
-
-export const toggleAnimation = () => ({
-  type: 'TOGGLE_ANIMATION',
+  payload: id,
 })
 
 export const setName = name => ({
   type: 'SET_NAME',
   payload: name,
-})
-
-export const switchSide = () => ({
-  type: 'SWITCH_SIDE'
 })
