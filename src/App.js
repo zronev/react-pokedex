@@ -1,13 +1,26 @@
 import React from 'react'
 import Header from './components/Header'
 import Pokedex from './components/Pokedex'
+import Menu from './components/Menu'
+
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Pokedex />
-    </div>
+    <Router>
+      <div className="App">
+        <Header />
+        <Menu />
+        <Switch>
+          <Route exact path="/">
+            <Pokedex />
+          </Route>
+          <Route path="/about">
+            <h1>Hello!</h1>
+          </Route>
+        </Switch>
+      </div>
+    </Router>
   )
 }
 
