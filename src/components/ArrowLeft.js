@@ -26,7 +26,7 @@ const ArrowLeft = () => {
 
   return (
     <button onClick={handleClick} onKeyDown={handleKeyDown} className="arrow arrow_left">
-      <i className="fas fa-arrow-left"></i>
+      <i className="fas fa-caret-left"></i>
     </button>
   )
 }
