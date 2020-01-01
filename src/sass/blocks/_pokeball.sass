@@ -8,7 +8,7 @@
 
   cursor: pointer
 
-  border: 4px solid $pokeball-border-color
+  border: 4px solid lighten($pokeball-border-color, 18)
   border-radius: 50%
 
   box-shadow: inset -5px 5px 0 5px $pokeball-shadow-color
@@ -35,7 +35,7 @@
     width: 100%
     height: 4px
 
-    background: $pokeball-border-color
+    background: lighten($pokeball-border-color, 18)
 
   &__button
     position: absolute
@@ -52,7 +52,7 @@
 
     z-index: 10
 
-    box-shadow: 0 0 0 4px $main-color
+    box-shadow: 0 0 0 4px lighten($pokeball-border-color, 18)
 
     transition: background 0.3s
 
