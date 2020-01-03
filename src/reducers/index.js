@@ -18,6 +18,7 @@ const id = pokemonIDReducer
 const name = setNameReducer
 const offset = offsetReducer
 const liked = likedReducer
+const showLiked = toggleDataReducer('showLiked')
 
 export const rootReducer = combineReducers({
   pokemons,
@@ -28,6 +29,7 @@ export const rootReducer = combineReducers({
   name,
   liked,
   offset,
+  showLiked,
   menu,
   chartType,
   animation,
