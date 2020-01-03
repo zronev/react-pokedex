@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { addToLiked, deleteFromLiked } from '../actions'
 
-const Like = ({ id }) => {
+const Like = ({ id, parent }) => {
   const dispatch = useDispatch()
   const liked = useSelector(state => state.liked)
 
@@ -23,11 +23,11 @@ const Like = ({ id }) => {
   return (
     <>
       {isLiked ? (
-        <button onClick={handleDislikeClick} className="like like--active">
+        <button onClick={handleDislikeClick} className={`like like--active ${parent}__like`}>
           <i className="fas fa-heart" />
         </button>
       ) : (
-        <button onClick={handleLikeClick} className="like">
+        <button onClick={handleLikeClick} className={`like ${parent}__like`}>
           <i className="far fa-heart" />
         </button>
       )}

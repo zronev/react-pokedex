@@ -29,7 +29,7 @@ const Card = ({ url }) => {
               {` ${pokemon.name}`}
             </p>
 
-            <Like id={pokemon.id}/>
+            <Like id={pokemon.id} parent={'card'} />
           </div>
 
           {pokemon.sprites ? (

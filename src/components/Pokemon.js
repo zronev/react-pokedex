@@ -33,7 +33,7 @@ const Pokemon = ({ pokemon }) => {
         {` ${name}`}
       </p>
 
-      <Like id={id} />
+      <Like id={id} parent={'pokemon'} />
 
       <SpriteWithSwitcher sprites={sprites} />
 
