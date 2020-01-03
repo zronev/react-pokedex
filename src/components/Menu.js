@@ -35,6 +35,13 @@ const Menu = () => {
           </li>
 
           <li className="menu__item">
+            <Link onClick={handleClick} className="link menu__link" to="/favorites">
+              <i className="link__icon fas fa-heart" />
+              Favorites
+            </Link>
+          </li>
+
+          <li className="menu__item">
             <Link onClick={handleClick} className="link menu__link" to="/about">
               <i className="link__icon fas fa-align-left" />
               About

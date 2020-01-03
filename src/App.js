@@ -5,6 +5,7 @@ import Menu from './components/Menu'
 import Grid from './components/Grid'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Favorites from './components/Favorites'
 
 function App() {
   return (
@@ -20,6 +21,10 @@ function App() {
 
           <Route path="/grid">
             <Grid />
+          </Route>
+
+          <Route path="/favorites">
+            <Favorites />
           </Route>
 
           <Route path="/about">
