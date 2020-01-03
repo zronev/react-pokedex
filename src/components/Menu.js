@@ -28,6 +28,13 @@ const Menu = () => {
           </li>
 
           <li className="menu__item">
+            <Link onClick={handleClick} className="link menu__link" to="/grid">
+              <i className="link__icon fas fa-th-large" />
+              Grid
+            </Link>
+          </li>
+
+          <li className="menu__item">
             <Link onClick={handleClick} className="link menu__link" to="/about">
               <i className="link__icon fas fa-align-left" />
               About
