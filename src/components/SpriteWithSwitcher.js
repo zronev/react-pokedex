@@ -13,7 +13,7 @@ const SpriteWithSwitcher = ({ sprites }) => {
 
   return (
     <div className="sprite pokemon__sprite">
-      <Sprite side={side} sprites={sprites}/>
+      <Sprite side={side} sprites={sprites} />
       <button onClick={handleClick} className="button button--switch sprite__switch-side">
         <i className="fas fa-sync-alt"></i>
       </button>
