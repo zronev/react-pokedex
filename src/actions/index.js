@@ -51,3 +51,13 @@ export const incOffset = () => ({
 export const decOffset = () => ({
   type: 'DEC_OFFSET',
 })
+
+export const addToLiked = id => ({
+  type: 'ADD_TO_LIKED',
+  payload: id,
+})
+
+export const deleteFromLiked = id => ({
+  type: 'DELETE_FROM_LIKED',
+  payload: id,
+})

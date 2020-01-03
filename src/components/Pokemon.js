@@ -11,6 +11,7 @@ import Stats from './Stats'
 import SpriteWithSwitcher from './SpriteWithSwitcher'
 import Chart from './Chart'
 import EvolutionList from './EvolutionList'
+import Like from './Like'
 
 const Pokemon = ({ pokemon }) => {
   const { name, id, abilities, types, stats, sprites, species } = pokemon
@@ -31,6 +32,8 @@ const Pokemon = ({ pokemon }) => {
         <span className="id pokemon__id">{id}</span>
         {` ${name}`}
       </p>
+
+      <Like id={id} />
 
       <SpriteWithSwitcher sprites={sprites} />
 

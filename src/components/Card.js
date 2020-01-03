@@ -3,6 +3,7 @@ import TypesList from './TypesList'
 import AbilitiesList from './AbilitiesList'
 import Sprite from './Sprite'
 import Spinner from './Spinner'
+import Like from './Like'
 
 const Card = ({ url }) => {
   const [pokemon, setPokemon] = useState()
@@ -28,9 +29,7 @@ const Card = ({ url }) => {
               {` ${pokemon.name}`}
             </p>
 
-            <button className="like">
-              <i className="far fa-heart" />
-            </button>
+            <Like id={pokemon.id}/>
           </div>
 
           {pokemon.sprites ? (

@@ -4,6 +4,7 @@ import { pokemonIDReducer } from './pokemonIDReducer'
 import { setNameReducer } from './setNameReducer'
 import { toggleDataReducer } from './toggleDataReducer'
 import { offsetReducer } from './offsetReducer'
+import { likedReducer } from './likedReducer'
 
 const pokemons = getAsyncDataReducer('pokemons')
 const pokemon = getAsyncDataReducer('pokemon')
@@ -16,6 +17,7 @@ const menu = toggleDataReducer('menu')
 const id = pokemonIDReducer
 const name = setNameReducer
 const offset = offsetReducer
+const liked = likedReducer
 
 export const rootReducer = combineReducers({
   pokemons,
@@ -24,6 +26,7 @@ export const rootReducer = combineReducers({
   evolutionChain,
   id,
   name,
+  liked,
   offset,
   menu,
   chartType,
