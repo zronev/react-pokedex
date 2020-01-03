@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux'
 import { useAsyncState } from '../custom hooks/useAsyncState'
 import Spinner from './Spinner'
 import Pokemon from './Pokemon'
-import ArrowLeft from './ArrowLeft'
-import ArrowRight from './ArrowRight'
+import ArrowLeftPokemon from './ArrowLeftPokemon'
+import ArrowRightPokemon from './ArrowRightPokemon'
 
 const Pokedex = () => {
   const id = useSelector(state => state.id)
@@ -18,8 +18,8 @@ const Pokedex = () => {
       {payload && payload.pokemon ? (
         <>
           <div className="arrows">
-            <ArrowLeft />
-            <ArrowRight />
+            <ArrowLeftPokemon />
+            <ArrowRightPokemon />
           </div>
           <Pokemon pokemon={payload.pokemon} />
         </>

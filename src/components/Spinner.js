@@ -3,7 +3,7 @@ import React from 'react'
 const Spinner = () => {
   return (
     <span className="spinner">
-      Loading...
+      <i className="fas fa-spinner" />
     </span>
   )
 }
