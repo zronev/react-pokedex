@@ -1,26 +1,16 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { dataToggleAction } from '../actions'
 
-const Sprite = ({ sprites }) => {
-  const dispatch = useDispatch()
-  const side = useSelector(state => state.side)
+const Sprite = ({ side, sprites, parent }) => {
+  const hasAnyImage = sprites.front_default || sprites.back_default
 
-  const handleClick = () => {
-    dispatch(dataToggleAction('side'))
-  }
-
-  return (
-    <div className="sprite pokemon__sprite">
-      <img
-        src={side ? sprites.back_default : sprites.front_default}
-        alt="pokemon"
-        className="sprite__image"
-      />
-      <button onClick={handleClick} className="button button--switch sprite__switch-side">
-        <i className="fas fa-sync-alt"></i>
-      </button>
-    </div>
+  return hasAnyImage ? (
+    <img
+      src={side ? sprites.back_default : sprites.front_default}
+      alt="pokemon"
+      className={`sprite--image ${parent}__sprite`}
+    />
+  ) : (
+    <span className={`sprite--no-image ${parent}__sprite`}>Hello</span>
   )
 }
 
