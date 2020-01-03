@@ -43,3 +43,11 @@ export const setName = name => ({
   type: 'SET_NAME',
   payload: name,
 })
+
+export const incOffset = () => ({
+  type: 'INC_OFFSET',
+})
+
+export const decOffset = () => ({
+  type: 'DEC_OFFSET',
+})
