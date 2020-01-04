@@ -6,6 +6,7 @@ import Grid from './components/Grid'
 
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Favorites from './components/Favorites'
+import About from './components/About'
 
 function App() {
   return (
@@ -28,7 +29,7 @@ function App() {
           </Route>
 
           <Route path="/about">
-            <h1>Hello!</h1>
+            <About />
           </Route>
         </Switch>
       </div>
