@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { getPokemons } from '../modules/getPokemons'
 import { useAsyncState } from '../custom hooks/useAsyncState'
 import Spinner from './Spinner'
@@ -7,6 +7,9 @@ import ArrowLeftGrid from './ArrowLeftGrid'
 import ArrowRightGrid from './ArrowRightGrid'
 import { useSelector } from 'react-redux'
 import FilterLiked from './FilterLiked'
+import { useDispatch } from 'react-redux'
+import { incOffset } from '../actions'
+import { decOffset } from '../actions'
 
 const Grid = () => {
   const offset = useSelector(state => state.offset)
@@ -29,6 +32,49 @@ const Grid = () => {
         <Card key={index} url={`https://pokeapi.co/api/v2/pokemon/${url}`} />
       ))
     : null
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
+
+    let xDown = null
+    let yDown = null
+
+    const getTouches = e => e.touches
+
+    const handleTouchStart = e => {
+      const firstTouch = getTouches(e)[0]
+      xDown = firstTouch.clientX
+      yDown = firstTouch.clientY
+    }
+
+    const handleTouchMove = e => {
+      if (!xDown || !yDown) return
+
+      let xUp = e.touches[0].clientX
+      let yUp = e.touches[0].clientY
+
+      let xDiff = xDown - xUp
+      let yDiff = yDown - yUp
+
+      if (Math.abs(xDiff) > Math.abs(yDiff)) {
+        /*most significant*/
+        if (xDiff > 0) dispatch(incOffset())
+        else dispatch(decOffset())
+      }
+      /* reset values */
+      xDown = null
+      yDown = null
+    }
+
+    document.addEventListener('touchstart', handleTouchStart, false)
+    document.addEventListener('touchmove', handleTouchMove, false)
+    return () => {
+      document.removeEventListener('touchstart', handleTouchStart, false)
+      document.removeEventListener('touchmove', handleTouchMove, false)
+    }
+  }, [dispatch])
 
   return (
     <>
