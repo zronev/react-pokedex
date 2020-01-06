@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Radar } from 'react-chartjs-2'
 
 const Chart = ({ stats }) => {
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+  const [chartWidth, setChartWidth] = useState(350)
+  const [fontSize, setFontSize] = useState(16)
+
+  useEffect(() => {
+    const updateSize = () => {
+      setScreenWidth(window.innerWidth)
+    }
+    updateSize()
+
+    if (screenWidth <= 458) {
+      setFontSize(14)
+      setChartWidth(275)
+    } else if (screenWidth <= 768) {
+      setFontSize(16)
+      setChartWidth(350)
+    } else if (screenWidth <= 1024) {
+      setFontSize(18)
+      setChartWidth(400)
+    } else if (screenWidth <= 1440) {
+      setFontSize(20)
+      setChartWidth(450)
+    }
+
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [screenWidth])
+
   const baseStats = stats.map(stat => stat.base_stat)
   const statsNames = stats.map(stat => stat.stat.name)
 
@@ -14,7 +42,7 @@ const Chart = ({ stats }) => {
         display: false,
       },
       pointLabels: {
-        fontSize: 14,
+        fontSize: fontSize,
         fontFamily: 'Open Sans',
         fontColor: '#2d3436',
       },
@@ -44,8 +72,14 @@ const Chart = ({ stats }) => {
   }
 
   return (
-    <div className="radar pokemon__radar">
-      <Radar data={data} width={350} height={350} options={options} />
+    <div className="chart chart--radar pokemon__chart">
+      <Radar
+        data={data}
+        width={chartWidth}
+        height={chartWidth}
+        options={options}
+        redraw={true}
+      />
     </div>
   )
 }
