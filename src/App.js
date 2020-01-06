@@ -10,7 +10,7 @@ import About from './components/About'
 
 function App() {
   return (
-    <Router>
+    <Router basename="/react-pokedex">
       <div className="App">
         <Header />
         <Menu />
