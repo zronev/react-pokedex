@@ -11,6 +11,7 @@ import Chart from './Chart'
 import EvolutionList from './EvolutionList'
 import Like from './Like'
 import ToggleCharts from './ToggleCharts'
+import Id from './Id'
 
 const Pokemon = ({ pokemon }) => {
   const { name, id, abilities, types, stats, sprites, species } = pokemon
@@ -23,7 +24,7 @@ const Pokemon = ({ pokemon }) => {
   return (
     <section className="pokemon">
       <p className="name pokemon__name">
-        <span className="id pokemon__id">{id}</span>
+        <Id id={id} />
         {` ${name}`}
       </p>
 
@@ -31,7 +32,7 @@ const Pokemon = ({ pokemon }) => {
 
       <SpriteWithSwitcher sprites={sprites} />
 
-      <AbilitiesList abilities={abilities} />
+      <AbilitiesList abilities={abilities} parent={'pokemon'} />
       <TypesList types={types} />
 
       {chartType && <Chart stats={stats} />}

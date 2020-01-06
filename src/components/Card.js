@@ -4,6 +4,7 @@ import AbilitiesList from './AbilitiesList'
 import Sprite from './Sprite'
 import Spinner from './Spinner'
 import Like from './Like'
+import Id from './Id'
 
 const Card = ({ url }) => {
   const [pokemon, setPokemon] = useState()
@@ -25,7 +26,7 @@ const Card = ({ url }) => {
         <>
           <div className="card__header">
             <p className="name card__name">
-              <span className="id card__id">{pokemon.id}</span>
+              <Id id={pokemon.id} />
               {` ${pokemon.name}`}
             </p>
 
@@ -39,7 +40,7 @@ const Card = ({ url }) => {
           )}
 
           <TypesList types={pokemon.types} />
-          <AbilitiesList abilities={pokemon.abilities} />
+          <AbilitiesList abilities={pokemon.abilities} parent={'card'}/>
         </>
       ) : null}
     </section>
