@@ -7,10 +7,12 @@ const Sprite = ({ side, sprites, parent }) => {
     <img
       src={side ? sprites.back_default : sprites.front_default}
       alt="pokemon"
-      className={`sprite--image ${parent}__sprite`}
+      className={`sprite__image ${parent}__sprite`}
     />
   ) : (
-    <span className={`sprite--no-image ${parent}__sprite`}>Hello</span>
+    <span className={`sprite__no-image ${parent}__sprite`}>
+      No image <span className="sprite__emoji" role="img" aria-label="sad emoji">😥</span>
+    </span>
   )
 }
 

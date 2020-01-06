@@ -15,15 +15,15 @@ const Menu = () => {
   return (
     <>
       <nav className={`menu ${isOpen ? 'menu--is-open' : ''}`}>
-        <button onClick={handleClick} className="button button--menu menu__close">
+        <button onClick={handleClick} className="button button--menu-close menu__close">
           <i className="fas fa-times"></i>
         </button>
 
         <ul className="menu__list">
           <li className="menu__item">
             <Link onClick={handleClick} className="link menu__link" to="/">
-              <i className="link__icon fas fa-home" />
-              Home
+              <i className="link__icon fas fa-square" />
+              Card
             </Link>
           </li>
 
