@@ -1,0 +1,25 @@
+.toggle
+  color: $prime-color
+  background: $toggle-background
+  font-weight: bold
+
+  border: 3px solid transparent
+  border-radius: $border-radius
+
+  margin: 0 auto
+  padding: 0.5rem 1rem
+
+  transition: all 0.3s
+
+  &--left
+    border-right: 2px solid $prime-color
+    border-top-left-radius: $border-radius
+    border-bottom-left-radius: $border-radius
+
+  &--right
+    border-left: 2px solid $prime-color
+    border-top-right-radius: $border-radius
+    border-bottom-right-radius: $border-radius
+
+  &:active
+    box-shadow: inset 2px 2px 5px rgba(154, 147, 140, 0.5), 1px 1px 5px rgba(255, 255, 255, 1)

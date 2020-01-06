@@ -1,13 +1,30 @@
 .sprite
   position: relative
 
-  &--image
-    min-height: 200px
+  &__image
+    min-height: 12.5rem
     border: 3px solid white
     border-radius: $border-radius
     box-shadow: 0 1px 5px rgba(0,0,0,0.25)
 
+  &__no-image
+    display: flex
+    justify-content: center
+    align-items: center
+
+    font-size: 1.6em
+
+    height: 12.5rem
+    width: 12.5rem
+
+    border: 3px solid white
+    border-radius: $border-radius
+    box-shadow: 0 1px 5px rgba(0,0,0,0.25)
+
+  &__emoji
+    margin-left: 0.3rem
+
   &__switch-side
     position: absolute
     top: 5%
-    right: 0
+    right: 2%

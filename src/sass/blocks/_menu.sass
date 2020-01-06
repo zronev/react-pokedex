@@ -2,7 +2,7 @@
   display: flex
   flex-direction: column
 
-  font-size: 2rem
+  font-size: 2em
   color: #fff
   background: $red-color
 
@@ -10,7 +10,7 @@
   top: 0
 
   height: 100vh
-  padding: 0.5rem 1rem 2rem 2rem
+  padding: 1.5rem 1rem 2rem 2rem
   min-width: 320px
 
   z-index: 1100
@@ -26,7 +26,12 @@
     transform: translate3d(0, 0, 0)
 
   &__close
-    font-size: 1.2rem
-
-    color: inherit
     align-self: flex-end
+
+  @media screen and ( max-width: 425px ) 
+    padding: 1.5rem 0rem 2rem 2rem
+    min-width: 0px
+    width: 100vw
+
+    &__close
+      margin-right: 3rem

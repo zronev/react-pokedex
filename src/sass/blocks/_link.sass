@@ -1,9 +1,14 @@
 .link
-  display: grid
-  grid-template-columns: 1fr 5fr
+  display: flex
+  align-items: center
+
+  transition: all 0.3s
 
   &__icon
     margin-right: 0.5rem
+    width: 1.5em
+    justify-self: center
 
   &:hover
     color: $beige-color
+    text-shadow: 0 1px 7px rgba(0,0,0,0.15)
