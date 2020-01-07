@@ -58,8 +58,8 @@ const Pokedex = () => {
   }, [dispatch])
 
   return (
-    <div>
-      {payload && payload.pokemon ? (
+    <main>
+      {payload && payload.pokemon && !isLoading ? (
         <>
           <div className="arrows">
             <ArrowLeftPokemon />
@@ -68,9 +68,9 @@ const Pokedex = () => {
           <Pokemon pokemon={payload.pokemon} />
         </>
       ) : null}
-      {loadError && <p>Load Error</p>}
+      {loadError && !payload.pokemon && <p>Load Error</p>}
       {isLoading && <Spinner />}
-    </div>
+    </main>
   )
 }
 

@@ -89,7 +89,7 @@ const Grid = () => {
         {liked.length === 0 && !showLiked ? null : <FilterLiked />}
 
         <main className="cards-grid grid__cards-grid">
-          {showLiked ? loadLiked : loadAll}
+          {showLiked && !isLoading ? loadLiked : loadAll}
           {loadError && <p>Load Error</p>}
           {isLoading && <Spinner />}
         </main>

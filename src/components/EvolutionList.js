@@ -30,11 +30,9 @@ const EvolutionList = ({ species }) => {
         }
 
         const pokemon = evolvesTo[variant]
-        evolutionList[stage].push('🠚 ' + pokemon.species.name)
+        evolutionList[stage].push('> ' + pokemon.species.name)
 
-        if (pokemon.evolves_to.length !== 0) {
-          getNames(pokemon.evolves_to)
-        }
+        if (pokemon.evolves_to.length !== 0) getNames(pokemon.evolves_to)
       }
     }
 
@@ -46,7 +44,7 @@ const EvolutionList = ({ species }) => {
 
   return (
     <section className="evolutions pokemon__evolutions">
-      {payload && payload.evolutionChain ? (
+      {payload && payload.evolutionChain && !isLoading ? (
         <>
           <h2 className="evolutions__name">Evolution chain</h2>
           <div className="evolutions__chain">
@@ -57,7 +55,7 @@ const EvolutionList = ({ species }) => {
         </>
       ) : null}
 
-      {loadError && <p>Load Error</p>}
+      {loadError && !payload.evolutionChain && <p>Load Error</p>}
       {isLoading && <Spinner />}
     </section>
   )
