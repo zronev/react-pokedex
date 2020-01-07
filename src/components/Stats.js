@@ -11,10 +11,23 @@ const Stats = ({ stats }) => {
     }
     updateSize()
 
-    if (screenWidth <= 458) setChartWidth(275)
-    else if (screenWidth <= 768) setChartWidth(350)
-    else if (screenWidth <= 1024) setChartWidth(400)
-    else if (screenWidth <= 1440) setChartWidth(450)
+    switch (screenWidth) {
+      case screenWidth <= 458:
+        setChartWidth(275)
+        break
+      case screenWidth <= 768:
+        setChartWidth(350)
+        break
+      case screenWidth <= 1024:
+        setChartWidth(400)
+        break
+      case screenWidth <= 1440:
+        setChartWidth(450)
+        break
+
+      default:
+        setChartWidth(350)
+    }
 
     window.addEventListener('resize', updateSize)
     return () => window.removeEventListener('resize', updateSize)

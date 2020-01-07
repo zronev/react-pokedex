@@ -20,10 +20,10 @@ const Pokeball = () => {
   return (
     <div
       onClick={handleOnClick}
-      className={`pokeball ${isAnimated ? 'pokeball_animated' : ''} header__pokeball`}
+      className={`pokeball ${isAnimated ? 'pokeball--animated' : ''} header__pokeball`}
     >
       <div
-        className={`pokeball__button ${isAnimated ? 'pokeball__button_animated' : ''}`}
+        className={`pokeball__button ${isAnimated ? 'pokeball__button--animated' : ''}`}
       ></div>
     </div>
   )

@@ -1,15 +1,17 @@
 import React, { useCallback, useEffect } from 'react'
 import { getPokemons } from '../modules/getPokemons'
 import { useAsyncState } from '../custom hooks/useAsyncState'
+import { useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { incOffset } from '../actions'
+import { decOffset } from '../actions'
+
 import Spinner from './Spinner'
 import Card from './Card'
 import ArrowLeftGrid from './ArrowLeftGrid'
 import ArrowRightGrid from './ArrowRightGrid'
-import { useSelector } from 'react-redux'
 import FilterLiked from './FilterLiked'
-import { useDispatch } from 'react-redux'
-import { incOffset } from '../actions'
-import { decOffset } from '../actions'
+
 
 const Grid = () => {
   const offset = useSelector(state => state.offset)

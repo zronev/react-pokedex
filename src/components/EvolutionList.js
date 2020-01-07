@@ -15,7 +15,8 @@ const EvolutionList = ({ species }) => {
     const evolution = evolutionChain.chain
     let evolutionList = []
 
-    evolutionList.push([evolution.species.name])
+    let name = evolution.species.name
+    evolutionList.push([name])
 
     const evolvesTo = evolution.evolves_to
     let stage = 0
@@ -30,15 +31,14 @@ const EvolutionList = ({ species }) => {
         }
 
         const pokemon = evolvesTo[variant]
-        evolutionList[stage].push('> ' + pokemon.species.name)
+        const name = pokemon.species.name
+        evolutionList[stage].push('> ' + name)
 
         if (pokemon.evolves_to.length !== 0) getNames(pokemon.evolves_to)
       }
     }
 
     getNames(evolvesTo)
-    console.log(evolutionList)
-
     return evolutionList
   }
 

@@ -1,7 +1,9 @@
 import React from 'react'
-import Pokeball from './Pokeball'
 import { useDispatch } from 'react-redux'
 import { dataToggleAction } from '../actions'
+import { Link } from 'react-router-dom'
+
+import Pokeball from './Pokeball'
 
 const Header = () => {
   const dispatch = useDispatch()
@@ -12,8 +14,10 @@ const Header = () => {
   return (
     <header className="header">
       <h1 className="header__title">
-        <span className="header__title_poke">Poké</span>
-        <span className="header__title_dex">dex</span>
+        <Link to="/">
+          <span className="header__title_poke">Poké</span>
+          <span className="header__title_dex">dex</span>
+        </Link>
       </h1>
       <Pokeball />
       <button onClick={handleClick} className="header__menu-button button button--menu">

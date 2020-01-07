@@ -12,18 +12,27 @@ const Chart = ({ stats }) => {
     }
     updateSize()
 
-    if (screenWidth <= 458) {
-      setFontSize(14)
-      setChartWidth(275)
-    } else if (screenWidth <= 768) {
-      setFontSize(16)
-      setChartWidth(350)
-    } else if (screenWidth <= 1024) {
-      setFontSize(18)
-      setChartWidth(400)
-    } else if (screenWidth <= 1440) {
-      setFontSize(20)
-      setChartWidth(450)
+    switch (screenWidth) {
+      case screenWidth <= 458:
+        setFontSize(14)
+        setChartWidth(275)
+        break
+      case screenWidth <= 768:
+        setFontSize(16)
+        setChartWidth(350)
+        break
+      case screenWidth <= 1024:
+        setFontSize(18)
+        setChartWidth(400)
+        break
+      case screenWidth <= 1440:
+        setFontSize(20)
+        setChartWidth(450)
+        break
+
+      default:
+        setFontSize(16)
+        setChartWidth(350)
     }
 
     window.addEventListener('resize', updateSize)
@@ -73,12 +82,7 @@ const Chart = ({ stats }) => {
 
   return (
     <div className="chart chart--radar pokemon__chart">
-      <Radar
-        data={data}
-        width={chartWidth}
-        height={chartWidth}
-        options={options}
-      />
+      <Radar data={data} width={chartWidth} height={chartWidth} options={options} />
     </div>
   )
 }

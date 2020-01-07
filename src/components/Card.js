@@ -24,14 +24,14 @@ const Card = ({ url }) => {
     <section className="card">
       {pokemon ? (
         <>
-          <div className="card__header">
+          <header className="card__header">
             <p className="name card__name">
               <Id id={pokemon.id} />
               {` ${pokemon.name}`}
             </p>
 
             <Like id={pokemon.id} parent={'card'} />
-          </div>
+          </header>
 
           {pokemon.sprites ? (
             <Sprite sprites={pokemon.sprites} parent={'card'} />
@@ -40,7 +40,7 @@ const Card = ({ url }) => {
           )}
 
           <TypesList types={pokemon.types} />
-          <AbilitiesList abilities={pokemon.abilities} parent={'card'}/>
+          <AbilitiesList abilities={pokemon.abilities} parent={'card'} />
         </>
       ) : null}
     </section>

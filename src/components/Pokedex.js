@@ -1,12 +1,13 @@
 import React, { useCallback, useEffect } from 'react'
 import { getPokemon } from '../modules/getPokemon'
-import { useSelector, useDispatch } from 'react-redux'
 import { useAsyncState } from '../custom hooks/useAsyncState'
+import { useSelector, useDispatch } from 'react-redux'
+import { nextPokemon, prevPokemon } from '../actions'
+
 import Spinner from './Spinner'
 import Pokemon from './Pokemon'
 import ArrowLeftPokemon from './ArrowLeftPokemon'
 import ArrowRightPokemon from './ArrowRightPokemon'
-import { nextPokemon, prevPokemon } from '../actions'
 
 const Pokedex = () => {
   const id = useSelector(state => state.id)
@@ -18,7 +19,6 @@ const Pokedex = () => {
 
   useEffect(() => {
     // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-
     let xDown = null
     let yDown = null
 
@@ -40,11 +40,10 @@ const Pokedex = () => {
       let yDiff = yDown - yUp
 
       if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        /*most significant*/
         if (xDiff > 0) dispatch(nextPokemon())
         else dispatch(prevPokemon())
       }
-      /* reset values */
+
       xDown = null
       yDown = null
     }

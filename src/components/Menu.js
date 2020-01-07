@@ -14,7 +14,7 @@ const Menu = () => {
 
   return (
     <>
-      <nav className={`menu ${isOpen ? 'menu--is-open' : ''}`}>
+      <nav className={`menu ${isOpen ? 'menu--open' : ''}`}>
         <button onClick={handleClick} className="button button--menu-close menu__close">
           <i className="fas fa-times"></i>
         </button>
