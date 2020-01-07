@@ -78,7 +78,6 @@ const Chart = ({ stats }) => {
         width={chartWidth}
         height={chartWidth}
         options={options}
-        redraw={true}
       />
     </div>
   )

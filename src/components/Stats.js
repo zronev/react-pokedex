@@ -4,7 +4,6 @@ import { HorizontalBar } from 'react-chartjs-2'
 const Stats = ({ stats }) => {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
   const [chartWidth, setChartWidth] = useState(350)
-  const [fontSize, setFontSize] = useState(16)
 
   useEffect(() => {
     const updateSize = () => {
@@ -12,19 +11,10 @@ const Stats = ({ stats }) => {
     }
     updateSize()
 
-    if (screenWidth <= 458) {
-      setFontSize(14)
-      setChartWidth(275)
-    } else if (screenWidth <= 768) {
-      setFontSize(16)
-      setChartWidth(350)
-    } else if (screenWidth <= 1024) {
-      setFontSize(18)
-      setChartWidth(400)
-    } else if (screenWidth <= 1440) {
-      setFontSize(20)
-      setChartWidth(450)
-    }
+    if (screenWidth <= 458) setChartWidth(275)
+    else if (screenWidth <= 768) setChartWidth(350)
+    else if (screenWidth <= 1024) setChartWidth(400)
+    else if (screenWidth <= 1440) setChartWidth(450)
 
     window.addEventListener('resize', updateSize)
     return () => window.removeEventListener('resize', updateSize)
@@ -64,7 +54,6 @@ const Stats = ({ stats }) => {
         width={chartWidth}
         height={chartWidth}
         options={options}
-        redraw={true}
       />
     </div>
   )
