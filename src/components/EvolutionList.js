@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react'
 import { getEvolutionChain } from '../modules/getEvolutionChain'
 import { useAsyncState } from '../custom hooks/useAsyncState'
-import EvolutionItem from './EvolutionItem'
+
 import Spinner from './Spinner'
+import EvolutionStage from './EvolutionStage'
 
 const EvolutionList = ({ species }) => {
   const loader = useCallback(getEvolutionChain(species.evolution_chain.url), [
@@ -12,28 +13,35 @@ const EvolutionList = ({ species }) => {
 
   const getEvolutionList = evolutionChain => {
     const evolution = evolutionChain.chain
-    let evolutions = []
+    let evolutionList = []
 
-    const firstForm = {}
-    firstForm.name = evolution.species.name
-    evolutions.push(firstForm)
+    evolutionList.push([evolution.species.name])
 
-    const item = evolution.evolves_to
+    const evolvesTo = evolution.evolves_to
+    let stage = 0
 
-    const getNames = item => {
-      for (let value in item) {
-        const specItem = item[value]
-        const evol = {}
+    const getNames = evolvesTo => {
+      for (let variant in evolvesTo) {
+        // Intentional type conversion
+        // eslint-disable-next-line eqeqeq
+        if (variant == 0) {
+          evolutionList.push([])
+          stage++
+        }
 
-        evol.name = specItem.species.name
-        evolutions.push(evol)
+        const pokemon = evolvesTo[variant]
+        evolutionList[stage].push('🠚 ' + pokemon.species.name)
 
-        if (specItem.evolves_to) getNames(specItem.evolves_to)
+        if (pokemon.evolves_to.length !== 0) {
+          getNames(pokemon.evolves_to)
+        }
       }
     }
 
-    getNames(item)
-    return evolutions
+    getNames(evolvesTo)
+    console.log(evolutionList)
+
+    return evolutionList
   }
 
   return (
@@ -41,11 +49,11 @@ const EvolutionList = ({ species }) => {
       {payload && payload.evolutionChain ? (
         <>
           <h2 className="evolutions__name">Evolution chain</h2>
-          <ul className="evolutions__list">
-            {getEvolutionList(payload.evolutionChain).map(evolution => (
-              <EvolutionItem key={evolution.name} name={evolution.name} />
+          <div className="evolutions__chain">
+            {getEvolutionList(payload.evolutionChain).map((stage, index) => (
+              <EvolutionStage key={index} stage={stage} />
             ))}
-          </ul>
+          </div>
         </>
       ) : null}
 
