@@ -6,6 +6,7 @@ const persistedState = loadFromLocalStorage()
 if (persistedState !== undefined) {
   persistedState.id = 1
   persistedState.offset = 0
+  persistedState.limit = 20
   persistedState.side = false
   persistedState.menu = false
 }

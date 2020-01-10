@@ -52,6 +52,10 @@ export const decOffset = () => ({
   type: 'DEC_OFFSET',
 })
 
+export const incLimit = () => ({
+  type: 'INC_LIMIT',
+})
+
 export const addToLiked = id => ({
   type: 'ADD_TO_LIKED',
   payload: id,

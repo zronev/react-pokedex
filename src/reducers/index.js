@@ -5,6 +5,7 @@ import { setNameReducer } from './setNameReducer'
 import { toggleDataReducer } from './toggleDataReducer'
 import { offsetReducer } from './offsetReducer'
 import { likedReducer } from './likedReducer'
+import { limitReducer } from './limitReducer'
 
 const pokemons = getAsyncDataReducer('pokemons')
 const pokemon = getAsyncDataReducer('pokemon')
@@ -14,11 +15,12 @@ const chartType = toggleDataReducer('chartType')
 const side = toggleDataReducer('side')
 const animation = toggleDataReducer('animation')
 const menu = toggleDataReducer('menu')
+const showLiked = toggleDataReducer('showLiked')
 const id = pokemonIDReducer
 const name = setNameReducer
 const offset = offsetReducer
+const limit = limitReducer
 const liked = likedReducer
-const showLiked = toggleDataReducer('showLiked')
 
 export const rootReducer = combineReducers({
   pokemons,
@@ -29,6 +31,7 @@ export const rootReducer = combineReducers({
   name,
   liked,
   offset,
+  limit,
   showLiked,
   menu,
   chartType,
