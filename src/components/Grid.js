@@ -1,21 +1,30 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { getPokemons } from '../modules/getPokemons'
 import { useAsyncState } from '../custom hooks/useAsyncState'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { incOffset } from '../actions'
+import { incOffset, incLimit } from '../actions'
 import { decOffset } from '../actions'
 
 import Spinner from './Spinner'
 import Card from './Card'
-import ArrowLeftGrid from './ArrowLeftGrid'
-import ArrowRightGrid from './ArrowRightGrid'
+// import ArrowLeftGrid from './ArrowLeftGrid'
+// import ArrowRightGrid from './ArrowRightGrid'
 import FilterLiked from './FilterLiked'
 
-
 const Grid = () => {
+  const dispatch = useDispatch()
+
+  const limit = useSelector(state => state.limit)
   const offset = useSelector(state => state.offset)
-  const loader = useCallback(getPokemons(offset), [offset])
+  const [isFetching, setIsFetching] = useState(false)
+
+  const loader = useCallback(getPokemons(offset, limit, setIsFetching), [
+    offset,
+    limit,
+    setIsFetching,
+  ])
+
   const { payload, isLoading, loadError } = useAsyncState('pokemons', loader)
 
   const liked = useSelector(state => state.liked.sort((a, b) => a - b))
@@ -35,11 +44,14 @@ const Grid = () => {
       ))
     : null
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+    if (!isFetching) return
+    dispatch(incLimit())
+  }, [dispatch, isFetching])
 
+  // Swipes
   useEffect(() => {
     // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-
     let xDown = null
     let yDown = null
 
@@ -70,29 +82,37 @@ const Grid = () => {
       yDown = null
     }
 
+    const handleScroll = () => {
+      const fullLength = window.innerHeight + document.documentElement.scrollTop
+      if (fullLength !== document.documentElement.offsetHeight || showLiked) return
+      setIsFetching(true)
+    }
+
+    document.addEventListener('scroll', handleScroll, false)
     document.addEventListener('touchstart', handleTouchStart, false)
     document.addEventListener('touchmove', handleTouchMove, false)
     return () => {
+      // document.removeEventListener('scroll', handleScroll, false)
       document.removeEventListener('touchstart', handleTouchStart, false)
       document.removeEventListener('touchmove', handleTouchMove, false)
     }
-  }, [dispatch])
+  }, [dispatch, isFetching, showLiked])
 
   return (
     <>
-      {!showLiked ? (
+      {/* {!showLiked ? (
         <div className="arrows">
           <ArrowLeftGrid />
           <ArrowRightGrid />
         </div>
-      ) : null}
+      ) : null} */}
 
       <div className="grid">
         {liked.length === 0 && !showLiked ? null : <FilterLiked />}
 
         <main className="cards-grid grid__cards-grid">
           {showLiked && !isLoading ? loadLiked : loadAll}
-          {loadError && <p>Load Error</p>}
+          {loadError && !loadLiked && !loadAll && <p>Load Error</p>}
           {isLoading && <Spinner />}
         </main>
       </div>
