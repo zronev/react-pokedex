@@ -24,7 +24,7 @@ const Favorites = () => {
   return (
     <main className="cards-grid grid__cards-grid">
       {liked.length > 0 && !isLoading ? loadLiked : <p className="cards-grid__info">You don't have any favorite pokemons</p>}
-      {loadError && <p>Load Error</p>}
+      {loadError && !loadLiked && <p>Load Error</p>}
       {isLoading && <Spinner />}
     </main>
   )
