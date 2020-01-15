@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useCallback } from 'react'
 
-const EvolutionItem = ({ name }) => {
+const EvolutionItem = ({ name, index }) => {
   const [formattedName, setFormattedName] = useState('')
   const [pokemon, setPokemon] = useState({})
 
@@ -27,8 +27,14 @@ const EvolutionItem = ({ name }) => {
 
   return (
     <li className="evolution evolutions__evolution">
-      {pokemon.sprites && <img src={pokemon.sprites.front_default} alt="" />}
-      <span>{name}</span>
+      <figure className="figure evolution__figure">
+        {pokemon.sprites && (
+          <img src={pokemon.sprites.front_default} alt="" className="figure__img" />
+        )}
+        <figcaption className="figure__caption">
+          {index} {name}
+        </figcaption>
+      </figure>
     </li>
   )
 }

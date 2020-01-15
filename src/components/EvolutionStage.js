@@ -1,11 +1,14 @@
 import React from 'react'
 import EvolutionItem from './EvolutionItem'
 
-const EvolutionStage = ({ stage }) => {
+const EvolutionStage = ({ stage, index }) => {
   return (
-    <ul className="evolutions__stage">
-      {stage.map((name, index) => (
-        <EvolutionItem key={index} name={name} />
+    <ul>
+      {stage.map((name, i) => (
+        <div key={i} className="stage evolutions__stage">
+          {!(index === 0 && i === 0) && <i className="stage__arrow fas fa-arrow-right" />}
+          <EvolutionItem name={name} index={`${index}.${i}`} />
+        </div>
       ))}
     </ul>
   )

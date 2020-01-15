@@ -32,7 +32,7 @@ const EvolutionList = ({ species }) => {
 
         const pokemon = evolvesTo[variant]
         const name = pokemon.species.name
-        evolutionList[stage].push('> ' + name)
+        evolutionList[stage].push(name)
 
         if (pokemon.evolves_to.length !== 0) getNames(pokemon.evolves_to)
       }
@@ -49,7 +49,7 @@ const EvolutionList = ({ species }) => {
           <h2 className="evolutions__name">Evolution chain</h2>
           <div className="evolutions__chain">
             {getEvolutionList(payload.evolutionChain).map((stage, index) => (
-              <EvolutionStage key={index} stage={stage} />
+              <EvolutionStage key={index} index={index} stage={stage} />
             ))}
           </div>
         </>
