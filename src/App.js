@@ -15,7 +15,7 @@ function App() {
   const name = useSelector(state => state.name)
 
   return (
-    <Router basename="/react-pokedex">
+    <Router basename={process.env.PUBLIC_URL}>
       <div className="App">
         <Header />
         <Menu />
