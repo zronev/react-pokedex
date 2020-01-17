@@ -11,11 +11,15 @@ const pokemons = getAsyncDataReducer('pokemons')
 const pokemon = getAsyncDataReducer('pokemon')
 const species = getAsyncDataReducer('species')
 const evolutionChain = getAsyncDataReducer('evolutionChain')
+
 const chartType = toggleDataReducer('chartType')
 const side = toggleDataReducer('side')
 const animation = toggleDataReducer('animation')
 const menu = toggleDataReducer('menu')
 const showLiked = toggleDataReducer('showLiked')
+const search = toggleDataReducer('SEARCH')
+const showSearchResult = toggleDataReducer('SHOW_SEARCH_RESULT')
+
 const id = pokemonIDReducer
 const name = setNameReducer
 const offset = offsetReducer
@@ -32,7 +36,9 @@ export const rootReducer = combineReducers({
   liked,
   offset,
   limit,
+  search,
   showLiked,
+  showSearchResult,
   menu,
   chartType,
   animation,
