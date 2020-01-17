@@ -7,8 +7,13 @@ import Pokeball from './Pokeball'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const handleClick = () => {
+
+  const handleMenuClick = () => {
     dispatch(dataToggleAction('menu'))
+  }
+
+  const handleSearchClick = () => {
+    dispatch(dataToggleAction('SEARCH'))
   }
 
   return (
@@ -20,9 +25,14 @@ const Header = () => {
         </Link>
       </h1>
       <Pokeball />
-      <button onClick={handleClick} className="header__menu-button button button--menu">
+      <button
+        onClick={handleMenuClick}
+        className="header__menu-button button button--menu"
+      >
         <i className="fas fa-bars" />
       </button>
+
+      <i onClick={handleSearchClick} className="header__go-to-search fas fa-search" />
     </header>
   )
 }
