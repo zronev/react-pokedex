@@ -35,8 +35,20 @@ const Search = () => {
           type="search"
           className="search__input"
           placeholder="Type a pokemon name or id..."
+          required
         />
-        <i onClick={handleCloseClick} className="search__close fas fa-times"></i>
+        <div className="search__buttons">
+          <button type="search" className="search__find button button--find">
+            Find
+          </button>
+          <button
+            onClick={handleCloseClick}
+            type="button"
+            className="search__close button button--close"
+          >
+            Close
+          </button>
+        </div>
       </form>
 
       <div onClick={handleCloseClick} className={`${isOpen ? 'overlay' : ''}`} />
