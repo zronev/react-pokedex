@@ -1,0 +1,15 @@
+.search-result
+  display: none
+  position: absolute
+  left: 50%;
+  top: -10%;
+  transform: translate(-50%, 10%);
+  width: 100%
+  z-index: 10000
+
+  &--is-show
+    display: block
+
+  @media screen and ( max-width: 1400px )
+    left: 50%;
+    transform: translate(-50%, 10%);
