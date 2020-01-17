@@ -26,5 +26,25 @@
 
   &__switch-side
     position: absolute
-    top: 5%
-    right: 2%
+    top: 7%
+    right: 5%
+
+    cursor: pointer
+
+    font-size: 1.2em
+    color: $switch-color
+    background: transparent
+
+    transition: all 0.25s
+
+    &:hover
+      color: $prime-color
+    
+    &--active
+      animation: rotate 0.25s ease 1
+
+  @keyframes rotate
+    from
+      transform: rotate(0)
+    to
+      transform: rotate(360deg)
