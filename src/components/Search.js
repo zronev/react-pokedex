@@ -10,8 +10,9 @@ const Search = () => {
   const handleSubmit = e => {
     e.preventDefault()
 
-    if (Number(inputRef.current.value)) dispatch(setId(Number(inputRef.current.value)))
-    else {
+    if (Number(inputRef.current.value)) {
+      dispatch(setId(Number(inputRef.current.value)))
+    } else {
       dispatch(setName(inputRef.current.value.toLowerCase().trim()))
       dispatch(dataToggleAction('SHOW_SEARCH_RESULT'))
     }
@@ -25,11 +26,8 @@ const Search = () => {
   }
 
   return (
-    <>
-      <form
-        onSubmit={handleSubmit}
-        className={`search ${isOpen ? 'search--is-open' : ''} header__search`}
-      >
+    <div className={`search ${isOpen ? 'search--is-open' : ''}`}>
+      <form onSubmit={handleSubmit} className={`search__form`}>
         <input
           ref={inputRef}
           type="search"
@@ -52,7 +50,7 @@ const Search = () => {
       </form>
 
       <div onClick={handleCloseClick} className={`${isOpen ? 'overlay' : ''}`} />
-    </>
+    </div>
   )
 }
 

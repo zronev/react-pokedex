@@ -4,7 +4,7 @@ export const getPokemons = async (offset = 0, limit = 20, setIsFetching) => {
   )
   const data = await res.json()
 
-  if (setIsFetching) setIsFetching(false)
+  setIsFetching && setIsFetching(false)
 
   return Promise.resolve({ pokemons: data })
 }

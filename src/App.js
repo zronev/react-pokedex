@@ -21,9 +21,10 @@ function App() {
         <Menu />
         <Search />
 
+        {name && <SearchResult />}
+
         <Switch>
           <Route exact path="/">
-            {name && <SearchResult />}
             {!name && <Pokedex />}
           </Route>
 
