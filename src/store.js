@@ -1,4 +1,5 @@
-import { createStore } from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { rootReducer } from './reducers'
 import { saveToLocalStorage, loadFromLocalStorage } from './modules/localStorage'
 
@@ -12,11 +13,13 @@ if (persistedState !== undefined) {
   persistedState.menu = false
 }
 
+const middleware = [thunk]
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
+
 export const store = createStore(
   rootReducer,
   persistedState,
-  window.__REDUX_DEVTOOLS_EXTENSION__ &&
-    window.__REDUX_DEVTOOLS_EXTENSION__({ serialize: true, trace: true }),
+  composeEnhancers(applyMiddleware(...middleware)),
 )
 
 store.subscribe(() => saveToLocalStorage(store.getState()))
