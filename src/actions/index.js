@@ -1,29 +1,101 @@
-export const LOADING = stateProperty => `${stateProperty}_LOADING`
-export const SET_DATA = stateProperty => `${stateProperty}_SET_DATA`
-export const LOADING_ERROR = stateProperty => `${stateProperty}_LOADING_ERROR`
+export const LOADING = stateProperty => `LOADING`
+export const SET_DATA = stateProperty => `SET_DATA`
+export const LOADING_ERROR = stateProperty => `LOADING_ERROR`
+
 export const TOGGLE = stateProperty => `TOGGLE_${stateProperty}`
 
 // Action creators
-export const dataLoadingAction = stateProperty => ({
-  type: LOADING(stateProperty),
-  payload: {},
-})
-
-export const dataSetDataAction = (stateProperty, payload) => ({
-  type: SET_DATA(stateProperty),
-  payload,
-})
-
-export const dataLoadingErrorAction = (stateProperty, error) => ({
-  type: LOADING_ERROR(stateProperty),
-  payload: error,
-})
-
 export const dataToggleAction = stateProperty => ({
   type: TOGGLE(stateProperty),
 })
 
 // Actions
+export const loadPokemon = (id, controller) => async dispatch => {
+  dispatch({ type: 'LOADING_POKEMON' })
+
+  try {
+    const url = `https://pokeapi.co/api/v2/pokemon/${id}/`
+    const res = await fetch(url, { signal: controller.signal })
+    const data = await res.json()
+
+    dispatch({
+      type: 'SET_DATA_POKEMON',
+      data,
+    })
+  } catch (error) {
+    dispatch({
+      type: 'LOADING_ERROR_POKEMON',
+      error: error.message || 'Unexpected Error!!!',
+    })
+  }
+}
+
+export const loadPokemons = (
+  limit = 20,
+  offset = 0,
+  controller,
+  setIsFetching,
+) => async dispatch => {
+  dispatch({ type: 'LOADING_POKEMONS' })
+
+  try {
+    const url = `https://pokeapi.co/api/v2/pokemon/?offset=${offset}&limit=${limit}`
+
+    const res = await fetch(url, { signal: controller.signal })
+    const data = await res.json()
+
+    dispatch({
+      type: 'SET_DATA_POKEMONS',
+      data,
+    })
+  } catch (error) {
+    dispatch({
+      type: 'LOADING_ERROR_POKEMONS',
+      error: error.message || 'Unexpected Error!!!',
+    })
+  } finally {
+    setIsFetching && setIsFetching(false)
+  }
+}
+
+export const loadSpecies = (url, controller) => async dispatch => {
+  dispatch({ type: 'LOADING_SPECIES' })
+
+  try {
+    const res = await fetch(url, { signal: controller.signal })
+    const data = await res.json()
+
+    dispatch({
+      type: 'SET_DATA_SPECIES',
+      data,
+    })
+  } catch (error) {
+    dispatch({
+      type: 'LOADING_ERROR_SPECIES',
+      error: error.message || 'Unexpected Error!!!',
+    })
+  }
+}
+
+export const loadEvolutionChain = (url, controller) => async dispatch => {
+  dispatch({ type: 'LOADING_EVOLUTION' })
+
+  try {
+    const res = await fetch(url, { signal: controller.signal })
+    const data = await res.json()
+
+    dispatch({
+      type: 'SET_DATA_EVOLUTION',
+      data,
+    })
+  } catch (error) {
+    dispatch({
+      type: 'LOADING_ERROR_EVOLUTION',
+      error: error.message || 'Unexpected Error!!!',
+    })
+  }
+}
+
 export const nextPokemon = id => ({
   type: 'NEXT_POKEMON',
   payload: id,
