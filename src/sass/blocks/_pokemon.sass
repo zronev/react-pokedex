@@ -60,9 +60,9 @@
     align-self: start
   
   @media screen and ( max-width: 700px )
+    grid-template-rows: auto 1fr auto auto 1.5fr auto auto
     margin: 0 1rem 1.5rem 1rem
 
-  @media screen and ( max-width: 520px )
     &__abilities
       grid-column: span 6
       grid-row: 4 / 5
@@ -84,7 +84,6 @@
       justify-self: center
 
   @media screen and ( max-width: 450px )
-    grid-template-rows: auto 1fr auto auto 1.5fr auto auto
     grid-gap: 1rem
 
     &__name
