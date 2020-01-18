@@ -1,29 +1,27 @@
-import React, { useEffect, useState, useCallback } from 'react'
+import React, { useEffect, useState } from 'react'
 
 const EvolutionItem = ({ name, index }) => {
-  const [formattedName, setFormattedName] = useState('')
   const [pokemon, setPokemon] = useState({})
 
-  const formatName = useCallback(() => {
-    if (!name.includes('>')) {
-      setFormattedName(name)
-      return
-    }
-    setFormattedName(name.slice(2, name.length))
-  }, [name])
-
-  const fetchData = useCallback(async () => {
-    const res = await fetch(`https://pokeapi.co/api/v2/pokemon/${formattedName}/`)
-    const data = await res.json()
-
-    setPokemon(data)
-  }, [formattedName])
-
   useEffect(() => {
-    formatName()
+    const controller = new AbortController()
+    const url = `https://pokeapi.co/api/v2/pokemon/${name}/`
 
-    if (formattedName) fetchData()
-  }, [fetchData, formatName, formattedName, name])
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url, { signal: controller.signal })
+        const data = await res.json()
+
+        setPokemon(data)
+      } catch (e) {
+        console.log(`${e.name}: ${e.message}`)
+      }
+    }
+    fetchData()
+
+    return () => controller.abort()
+ 
+  }, [name])
 
   return (
     <li className="evolution evolutions__evolution">

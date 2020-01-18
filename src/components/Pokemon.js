@@ -1,7 +1,6 @@
-import React, { useCallback } from 'react'
-import { useSelector } from 'react-redux'
-import { getSpecies } from '../modules/getSpecies'
-import { useAsyncState } from '../custom hooks/useAsyncState'
+import React, { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { loadSpecies } from '../actions'
 
 import AbilitiesList from './AbilitiesList'
 import TypesList from './TypesList'
@@ -14,12 +13,18 @@ import ToggleCharts from './ToggleCharts'
 import Id from './Id'
 
 const Pokemon = ({ pokemon }) => {
+  const dispatch = useDispatch()
+  const chartType = useSelector(state => state.chartType)
+  const speciesData = useSelector(state => state.speciesData)
+
   const { name, id, abilities, types, stats, sprites, species } = pokemon
 
-  const chartType = useSelector(state => state.chartType)
+  useEffect(() => {
+    const controller = new AbortController()
+    dispatch(loadSpecies(species.url, controller))
 
-  const loader = useCallback(getSpecies(species.url), [species.url])
-  const { payload } = useAsyncState('species', loader)
+    return () => controller.abort()
+  }, [dispatch, species.url])
 
   return (
     <section className="pokemon">
@@ -40,7 +45,9 @@ const Pokemon = ({ pokemon }) => {
 
       <ToggleCharts />
 
-      {payload && payload.species ? <EvolutionList species={payload.species} /> : null}
+      {speciesData && speciesData.loaded ? (
+        <EvolutionList species={speciesData.data} />
+      ) : null}
     </section>
   )
 }

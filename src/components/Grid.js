@@ -1,15 +1,11 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import { getPokemons } from '../modules/getPokemons'
-import { useAsyncState } from '../custom hooks/useAsyncState'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { incOffset, incLimit } from '../actions'
+import { incOffset, incLimit, loadPokemons } from '../actions'
 import { decOffset } from '../actions'
 
 import Spinner from './Spinner'
 import Card from './Card'
-// import ArrowLeftGrid from './ArrowLeftGrid'
-// import ArrowRightGrid from './ArrowRightGrid'
 import FilterLiked from './FilterLiked'
 
 const Grid = () => {
@@ -17,23 +13,23 @@ const Grid = () => {
 
   const limit = useSelector(state => state.limit)
   const offset = useSelector(state => state.offset)
+  const pokemons = useSelector(state => state.pokemons)
   const [isFetching, setIsFetching] = useState(false)
 
-  const loader = useCallback(getPokemons(offset, limit, setIsFetching), [
-    offset,
-    limit,
-    setIsFetching,
-  ])
+  useEffect(() => {
+    const controller = new AbortController()
+    dispatch(loadPokemons(limit, offset, controller, setIsFetching))
 
-  const { payload, isLoading, loadError } = useAsyncState('pokemons', loader)
+    return () => controller.abort()
+  }, [dispatch, limit, offset])
 
   const liked = useSelector(state => state.liked.sort((a, b) => a - b))
   const showLiked = useSelector(state => state.showLiked)
 
-  const isLoaded = payload && payload.pokemons
+  const isLoaded = pokemons.loaded
 
   const loadAll = isLoaded
-    ? payload.pokemons.results.map((pokemon, index) => (
+    ? pokemons.data.results.map((pokemon, index) => (
         <Card key={index} url={pokemon.url} />
       ))
     : null
@@ -92,7 +88,7 @@ const Grid = () => {
     document.addEventListener('touchstart', handleTouchStart, false)
     document.addEventListener('touchmove', handleTouchMove, false)
     return () => {
-      // document.removeEventListener('scroll', handleScroll, false)
+      document.removeEventListener('scroll', handleScroll, false)
       document.removeEventListener('touchstart', handleTouchStart, false)
       document.removeEventListener('touchmove', handleTouchMove, false)
     }
@@ -111,9 +107,9 @@ const Grid = () => {
         {liked.length === 0 && !showLiked ? null : <FilterLiked />}
 
         <main className="cards-grid grid__cards-grid">
-          {showLiked && !isLoading ? loadLiked : loadAll}
-          {loadError && !loadLiked && !loadAll && <p>Load Error</p>}
-          {isLoading && <Spinner />}
+          {showLiked && !pokemons.loading ? loadLiked : loadAll}
+          {pokemons.error && !loadLiked && !loadAll && <p>Load Error</p>}
+          {pokemons.loading && <Spinner />}
         </main>
       </div>
     </>

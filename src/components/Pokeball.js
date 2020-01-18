@@ -1,30 +1,18 @@
-import React, { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { dataToggleAction } from '../actions'
+import React, { useState } from 'react'
 
 const Pokeball = () => {
-  const dispatch = useDispatch()
-  const isAnimated = useSelector(state => state.animation)
-
-  const handleOnClick = () => {
-    dispatch(dataToggleAction('animation'))
-  }
-
-  useEffect(() => {
-    if (isAnimated)
-      setTimeout(() => {
-        dispatch(dataToggleAction('animation'))
-      }, 1800)
-  }, [isAnimated, dispatch])
+  const [isAnimated, setIsAnimated] = useState(false)
+  const handleOnClick = () => setIsAnimated(true)
 
   return (
     <div
       onClick={handleOnClick}
+      onAnimationEnd={() => setIsAnimated(false)}
       className={`pokeball ${isAnimated ? 'pokeball--animated' : ''} header__pokeball`}
     >
       <div
         className={`pokeball__button ${isAnimated ? 'pokeball__button--animated' : ''}`}
-      ></div>
+      />
     </div>
   )
 }

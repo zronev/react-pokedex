@@ -27,7 +27,7 @@ const Header = () => {
       <Pokeball />
       <button
         onClick={handleMenuClick}
-        className="header__menu-button button button--menu"
+        className="header__menu-open menu-open"
       >
         <i className="fas fa-bars" />
       </button>

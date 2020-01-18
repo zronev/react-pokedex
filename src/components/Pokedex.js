@@ -1,8 +1,6 @@
-import React, { useCallback, useEffect } from 'react'
-import { getPokemon } from '../modules/getPokemon'
-import { useAsyncState } from '../custom hooks/useAsyncState'
+import React, { useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { nextPokemon, prevPokemon } from '../actions'
+import { nextPokemon, prevPokemon, loadPokemon } from '../actions'
 
 import Spinner from './Spinner'
 import Pokemon from './Pokemon'
@@ -11,11 +9,15 @@ import ArrowRightPokemon from './ArrowRightPokemon'
 
 const Pokedex = () => {
   const id = useSelector(state => state.id)
-
-  const loader = useCallback(getPokemon(id), [id])
-  const { payload, isLoading, loadError } = useAsyncState('pokemon', loader)
-
+  const pokemon = useSelector(state => state.pokemon)
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    const controller = new AbortController()
+    dispatch(loadPokemon(id, controller))
+
+    return () => controller.abort()
+  }, [dispatch, id])
 
   useEffect(() => {
     // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -58,17 +60,18 @@ const Pokedex = () => {
 
   return (
     <main>
-      {payload && payload.pokemon && !isLoading ? (
+      {pokemon.loaded && (
         <>
           <div className="arrows">
             <ArrowLeftPokemon />
             <ArrowRightPokemon />
           </div>
-          <Pokemon pokemon={payload.pokemon} />
+          <Pokemon pokemon={pokemon.data} />
         </>
-      ) : null}
-      {loadError && !payload.pokemon && <p>Load Error</p>}
-      {isLoading && <Spinner />}
+      )}
+
+      {pokemon.error && !pokemon.loaded && <p>Load Error</p>}
+      {pokemon.loading && <Spinner />}
     </main>
   )
 }

@@ -10,14 +10,19 @@ const Card = ({ url }) => {
   const [pokemon, setPokemon] = useState()
 
   useEffect(() => {
+    const controller = new AbortController()
     const fetchData = async () => {
-      const res = await fetch(url)
-      const data = await res.json()
-
-      setPokemon(data)
+      try {
+        const res = await fetch(url, { signal: controller.signal })
+        const data = await res.json()
+        setPokemon(data)
+      } catch (e) {
+        console.log(`${e.name}: ${e.message}`)
+      }
     }
-
     fetchData()
+
+    return () => controller.abort()
   }, [url])
 
   return (
