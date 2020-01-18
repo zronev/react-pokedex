@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "https://zronev.github.io/react-pokedex/",
+  "main": "index.html",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
@@ -16,6 +17,7 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
     "redux": "^4.0.4",
+    "redux-thunk": "^2.3.0",
     "three": "^0.112.1"
   },
   "scripts": {
