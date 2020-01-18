@@ -1,20 +1,22 @@
 import { combineReducers } from 'redux'
-import { getAsyncDataReducer } from './getAsyncDataReducer'
 import { pokemonIDReducer } from './pokemonIDReducer'
 import { setNameReducer } from './setNameReducer'
 import { toggleDataReducer } from './toggleDataReducer'
 import { offsetReducer } from './offsetReducer'
 import { likedReducer } from './likedReducer'
 import { limitReducer } from './limitReducer'
+import { loadPokemonReducer } from './loadPokemonReducer'
+import { loadPokemonsReducer } from './loadPokemonsReducer'
+import { loadSpeciesReducer } from './loadSpeciesReducer'
+import { loadEvolutionReducer } from './loadEvolutionReducer'
 
-const pokemons = getAsyncDataReducer('pokemons')
-const pokemon = getAsyncDataReducer('pokemon')
-const species = getAsyncDataReducer('species')
-const evolutionChain = getAsyncDataReducer('evolutionChain')
+const pokemons = loadPokemonsReducer
+const pokemon = loadPokemonReducer
+const speciesData = loadSpeciesReducer
+const evolutionChain = loadEvolutionReducer
 
 const chartType = toggleDataReducer('chartType')
 const side = toggleDataReducer('side')
-const animation = toggleDataReducer('animation')
 const menu = toggleDataReducer('menu')
 const showLiked = toggleDataReducer('showLiked')
 const search = toggleDataReducer('SEARCH')
@@ -29,7 +31,7 @@ const liked = likedReducer
 export const rootReducer = combineReducers({
   pokemons,
   pokemon,
-  species,
+  speciesData,
   evolutionChain,
   id,
   name,
@@ -41,6 +43,5 @@ export const rootReducer = combineReducers({
   showSearchResult,
   menu,
   chartType,
-  animation,
   side,
 })
