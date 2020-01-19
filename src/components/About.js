@@ -27,7 +27,7 @@ const About = () => {
         rel="noopener noreferrer"
         class="link link--github about__link"
       >
-        <i class="icon icon--github fab fa-github" />
+        <i className="icon icon--github fab fa-github" />
       </a>
     </main>
   )
