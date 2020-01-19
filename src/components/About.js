@@ -20,6 +20,15 @@ const About = () => {
         All data is collected 
         using <a href="https://pokeapi.co/" target="_blank" rel="noopener noreferrer" className="external-link">PokéAPI</a>.
       </p>
+
+      <a
+        href="https://github.com/zronev"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="link link--github about__link"
+      >
+        <i class="icon icon--github fab fa-github" />
+      </a>
     </main>
   )
 }
