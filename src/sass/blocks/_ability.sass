@@ -10,7 +10,6 @@
     top: 70%
     left: 0%
 
-    width: 100%
     max-width: 220px
     padding: 0.8rem
 
@@ -18,3 +17,20 @@
     background: $white-color
     border-radius: $border-radius
     box-shadow: 0px 3px 7px rgba(0,0,0,0.1)
+
+    @media screen and ( max-width: 1024px)
+      position: fixed
+      top: 40%
+      left: 50%
+      transform: translate(-50%, -40%)
+      z-index: 10000
+
+
+      width: auto
+      min-width: 275px
+      max-width: 600px
+      // max-width: 600px
+      margin: 0 auto
+      padding: 1.5rem 2rem
+
+      font-size: 2em
