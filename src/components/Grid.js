@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
-import { incOffset, incLimit, loadPokemons } from '../actions'
-import { decOffset } from '../actions'
+import { incLimit, loadPokemons } from '../actions'
 
 import Spinner from './Spinner'
 import Card from './Card'
@@ -14,24 +13,36 @@ const Grid = () => {
   const limit = useSelector(state => state.limit)
   const offset = useSelector(state => state.offset)
   const pokemons = useSelector(state => state.pokemons)
-  const [isFetching, setIsFetching] = useState(false)
+
+  const [pokemonsData, setPokemonsData] = useState()
+  const [isVisible, setIsVisible] = useState(false)
+  // const [isFetching, setIsFetching] = useState(false)
+
+  const handleClick = () => {
+    setIsVisible(false)
+    // setIsFetching(true)
+    dispatch(incLimit())
+  }
 
   useEffect(() => {
     const controller = new AbortController()
-    dispatch(loadPokemons(limit, offset, controller, setIsFetching))
+    dispatch(loadPokemons(limit, offset, controller))
 
     return () => controller.abort()
   }, [dispatch, limit, offset])
 
+  useEffect(() => {
+    setPokemonsData(pokemons.data.results)
+    // setIsFetching(false)
+  }, [pokemons])
+
   const liked = useSelector(state => state.liked.sort((a, b) => a - b))
   const showLiked = useSelector(state => state.showLiked)
 
-  const isLoaded = pokemons.loaded
+  const isLoaded = !!pokemonsData
 
   const loadAll = isLoaded
-    ? pokemons.data.results.map((pokemon, index) => (
-        <Card key={index} url={pokemon.url} />
-      ))
+    ? pokemonsData.map((pokemon, index) => <Card key={index} url={pokemon.url} />)
     : null
 
   const loadLiked = isLoaded
@@ -41,78 +52,33 @@ const Grid = () => {
     : null
 
   useEffect(() => {
-    if (!isFetching) return
-    dispatch(incLimit())
-  }, [dispatch, isFetching])
-
-  // Swipes
-  useEffect(() => {
-    // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
-    let xDown = null
-    let yDown = null
-
-    const getTouches = e => e.touches
-
-    const handleTouchStart = e => {
-      const firstTouch = getTouches(e)[0]
-      xDown = firstTouch.clientX
-      yDown = firstTouch.clientY
-    }
-
-    const handleTouchMove = e => {
-      if (!xDown || !yDown) return
-
-      let xUp = e.touches[0].clientX
-      let yUp = e.touches[0].clientY
-
-      let xDiff = xDown - xUp
-      let yDiff = yDown - yUp
-
-      if (Math.abs(xDiff) > Math.abs(yDiff)) {
-        /*most significant*/
-        if (xDiff > 0) dispatch(incOffset())
-        else dispatch(decOffset())
-      }
-      /* reset values */
-      xDown = null
-      yDown = null
-    }
-
     const handleScroll = () => {
       const fullLength = window.innerHeight + document.documentElement.scrollTop
       if (fullLength !== document.documentElement.offsetHeight || showLiked) return
-      setIsFetching(true)
+      setIsVisible(true)
     }
 
     document.addEventListener('scroll', handleScroll, false)
-    document.addEventListener('touchstart', handleTouchStart, false)
-    document.addEventListener('touchmove', handleTouchMove, false)
     return () => {
       document.removeEventListener('scroll', handleScroll, false)
-      document.removeEventListener('touchstart', handleTouchStart, false)
-      document.removeEventListener('touchmove', handleTouchMove, false)
     }
-  }, [dispatch, isFetching, showLiked])
+  }, [dispatch, showLiked])
 
   return (
-    <>
-      {/* {!showLiked ? (
-        <div className="arrows">
-          <ArrowLeftGrid />
-          <ArrowRightGrid />
-        </div>
-      ) : null} */}
-
-      <div className="grid">
-        {liked.length === 0 && !showLiked ? null : <FilterLiked />}
-
-        <main className="cards-grid grid__cards-grid">
-          {showLiked && !pokemons.loading ? loadLiked : loadAll}
-          {pokemons.error && !loadLiked && !loadAll && <p>Load Error</p>}
-          {pokemons.loading && <Spinner />}
-        </main>
-      </div>
-    </>
+    <div className="grid">
+      {liked.length === 0 && !showLiked ? null : <FilterLiked />}
+      <main className="cards-grid grid__cards-grid">
+        {showLiked && !pokemons.loading ? loadLiked : loadAll}
+        {pokemons.error && !loadLiked && !loadAll && <p>Load Error</p>}
+        {pokemons.loading && <Spinner />}
+      </main>
+      {isVisible && !showLiked && (
+        <button onClick={handleClick} className="button button--show-more grid__button">
+          Show More
+        </button>
+      )}
+      {/* {isFetching && <Spinner />} */}
+    </div>
   )
 }
 

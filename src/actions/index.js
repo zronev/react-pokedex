@@ -30,12 +30,7 @@ export const loadPokemon = (id, controller) => async dispatch => {
   }
 }
 
-export const loadPokemons = (
-  limit = 20,
-  offset = 0,
-  controller,
-  setIsFetching,
-) => async dispatch => {
+export const loadPokemons = (limit = 20, offset = 0, controller) => async dispatch => {
   dispatch({ type: 'LOADING_POKEMONS' })
 
   try {
@@ -53,8 +48,6 @@ export const loadPokemons = (
       type: 'LOADING_ERROR_POKEMONS',
       error: error.message || 'Unexpected Error!!!',
     })
-  } finally {
-    setIsFetching && setIsFetching(false)
   }
 }
 
