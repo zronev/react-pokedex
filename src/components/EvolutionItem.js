@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { setId } from '../actions'
 
 const EvolutionItem = ({ name, index }) => {
   const [pokemon, setPokemon] = useState({})
@@ -20,11 +22,16 @@ const EvolutionItem = ({ name, index }) => {
     fetchData()
 
     return () => controller.abort()
- 
   }, [name])
 
+  const dispatch = useDispatch()
+
+  const handleClick = () => {
+    pokemon.id && dispatch(setId(pokemon.id))
+  }
+
   return (
-    <li className="evolution evolutions__evolution">
+    <li onClick={handleClick} className="evolution evolutions__evolution">
       <figure className="figure evolution__figure">
         {pokemon.sprites && (
           <img src={pokemon.sprites.front_default} alt="" className="figure__img" />
