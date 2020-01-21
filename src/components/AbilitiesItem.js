@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 const AbilitiesItem = ({ ability }) => {
   const [showDetail, setShowDetail] = useState(false)
   const [abilityData, setAbilityData] = useState({})
-
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
   useEffect(() => {
@@ -16,6 +15,7 @@ const AbilitiesItem = ({ ability }) => {
 
   useEffect(() => {
     const controller = new AbortController()
+
     const fetchData = async () => {
       try {
         const res = await fetch(ability.url, { signal: controller.signal })
@@ -39,7 +39,6 @@ const AbilitiesItem = ({ ability }) => {
     setShowDetail(false)
   }
 
-
   const handleMouseEnter = () => {
     if (screenWidth < 1024) return
     setShowDetail(true)
@@ -56,7 +55,7 @@ const AbilitiesItem = ({ ability }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        className="abilty abilities__ability"
+        className="ability abilities__ability"
       >
         <span className="ability__name">{ability.name}</span>
         {showDetail && (
@@ -66,7 +65,9 @@ const AbilitiesItem = ({ ability }) => {
         )}
       </li>
 
-      {screenWidth < 1024 && <div onClick={handleCloseClick} className={`${showDetail ? 'overlay' : ''}`} />}
+      {screenWidth < 1024 && (
+        <div onClick={handleCloseClick} className={`${showDetail ? 'overlay' : ''}`} />
+      )}
     </>
   )
 }

@@ -12,9 +12,7 @@ const EvolutionList = ({ species }) => {
     const controller = new AbortController()
     dispatch(loadEvolutionChain(species.evolution_chain.url, controller))
 
-    return () => {
-      controller.abort()
-    }
+    return () => controller.abort()
   }, [dispatch, species.evolution_chain.url])
 
   const getEvolutionList = evolutionChain => {

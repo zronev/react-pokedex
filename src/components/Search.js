@@ -11,7 +11,7 @@ const Search = () => {
     e.preventDefault()
 
     if (Number(inputRef.current.value)) {
-      dispatch(setId(Number(inputRef.current.value)))
+      dispatch(setId(Number(inputRef.current.value.trim())))
     } else {
       dispatch(setName(inputRef.current.value.toLowerCase().trim()))
       dispatch(dataToggleAction('SHOW_SEARCH_RESULT'))

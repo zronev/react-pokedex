@@ -25,7 +25,7 @@ const About = () => {
         href="https://github.com/zronev"
         target="_blank"
         rel="noopener noreferrer"
-        class="link link--github about__link"
+        className="link link--github about__link"
       >
         <i className="icon icon--github fab fa-github" />
       </a>
