@@ -15,15 +15,33 @@ const Grid = () => {
   const pokemons = useSelector(state => state.pokemons)
 
   const arrowRef = useRef()
+
   const [pokemonsData, setPokemonsData] = useState()
   const [screenHeight, setScreenHeight] = useState(window.innerHeight)
 
-  const handleShowMoreClick = () => {
-    dispatch(incLimit())
-  }
+  const handleShowMoreClick = () => dispatch(incLimit())
 
   const handleArrowTopClick = () => {
-    window.scrollTo(0, 0)
+    const targetPos = document.documentElement.getBoundingClientRect().top
+    const startPos = window.pageYOffset
+    const duration = 1000
+
+    let startTime = null
+
+    // http://gizma.com/easing/
+    const easeOutExpo = (t, b, c, d) => c * (-Math.pow(2, (-10 * t) / d) + 1) + b
+
+    const animationScroll = currentTime => {
+      if (startTime === null) startTime = currentTime
+
+      const timeElapsed = currentTime - startTime
+      const y = easeOutExpo(timeElapsed, startPos, targetPos, duration)
+      window.scrollTo(0, y)
+
+      if (timeElapsed < duration) requestAnimationFrame(animationScroll)
+    }
+
+    requestAnimationFrame(animationScroll)
   }
 
   useEffect(() => {
@@ -46,7 +64,7 @@ const Grid = () => {
   }, [screenHeight])
 
   useEffect(() => {
-    const hideArrow = () => arrowRef.current.hidden = window.pageYOffset < screenHeight
+    const hideArrow = () => (arrowRef.current.hidden = window.pageYOffset < screenHeight)
 
     window.addEventListener('scroll', hideArrow)
     return () => window.removeEventListener('scroll', hideArrow)
