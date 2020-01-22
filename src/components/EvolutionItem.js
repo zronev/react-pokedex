@@ -4,6 +4,18 @@ import { setId } from '../actions'
 
 const EvolutionItem = ({ name, index }) => {
   const [pokemon, setPokemon] = useState({})
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
+
+  useEffect(() => {
+    const updateSize = () => setScreenWidth(window.innerWidth)
+    updateSize()
+
+    window.addEventListener('resize', updateSize)
+    return () => window.removeEventListener('resize', updateSize)
+  }, [screenWidth])
+
+  const dispatch = useDispatch()
+  const handleClick = () => pokemon.id && dispatch(setId(pokemon.id))
 
   useEffect(() => {
     const controller = new AbortController()
@@ -13,7 +25,6 @@ const EvolutionItem = ({ name, index }) => {
       try {
         const res = await fetch(url, { signal: controller.signal })
         const data = await res.json()
-
         setPokemon(data)
       } catch (e) {
         console.log(`${e.name}: ${e.message}`)
@@ -24,14 +35,12 @@ const EvolutionItem = ({ name, index }) => {
     return () => controller.abort()
   }, [name])
 
-  const dispatch = useDispatch()
-
-  const handleClick = () => {
-    pokemon.id && dispatch(setId(pokemon.id))
-  }
-
   return (
-    <li onClick={handleClick} className="evolution evolutions__evolution">
+    <li
+      onClick={screenWidth > 580 ? handleClick : null}
+      onDoubleClick={screenWidth <= 580 ? handleClick : null}
+      className="evolution evolutions__evolution"
+    >
       <figure className="figure evolution__figure">
         {pokemon.sprites && (
           <img src={pokemon.sprites.front_default} alt="" className="figure__img" />
