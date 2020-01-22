@@ -1,6 +1,27 @@
 .stage
   display: flex
+  flex-direction: column
   align-items: center
+
+  padding-bottom: 1rem
 
   &__arrow
     margin-right: 1.5rem
+
+  &__pokemon
+    display: flex
+    align-items: center
+
+  @media screen and ( max-width: 580px )
+    flex-direction: row
+    max-width: 100%
+    overflow-x: auto
+
+    &__pokemon
+      flex-direction: column
+      flex-wrap: wrap
+      margin: 0 0.5rem
+
+    &__arrow
+      align-items: center
+      margin: 0.8rem 0
