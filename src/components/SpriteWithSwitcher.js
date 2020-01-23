@@ -1,16 +1,12 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { dataToggleAction } from '../actions'
 import Sprite from './Sprite'
 
 const SpriteWithSwitcher = ({ sprites }) => {
-  const dispatch = useDispatch()
-  const side = useSelector(state => state.side)
-
+  const [side, setSide] = useState(false)
   const [rotate, setRotate] = useState(false)
 
   const handleClick = () => {
-    dispatch(dataToggleAction('side'))
+    setSide(!side)
     setRotate(true)
   }
 
