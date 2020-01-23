@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { HashRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Header from './components/Header'
 import Pokedex from './components/Pokedex'
@@ -8,24 +8,18 @@ import Grid from './components/Grid'
 import Favorites from './components/Favorites'
 import About from './components/About'
 import Search from './components/Search'
-import SearchResult from './components/SearchResult'
-import { useSelector } from 'react-redux'
 
 function App() {
-  const name = useSelector(state => state.name)
-
   return (
-    <Router basename={process.env.PUBLIC_URL}>
+    <Router>
       <div className="App">
         <Header />
         <Menu />
         <Search />
 
-        {name && <SearchResult />}
-
         <Switch>
           <Route exact path="/">
-            {!name && <Pokedex />}
+            <Pokedex />
           </Route>
 
           <Route path="/grid">
