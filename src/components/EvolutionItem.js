@@ -4,15 +4,6 @@ import { setId } from '../actions'
 
 const EvolutionItem = ({ name, index }) => {
   const [pokemon, setPokemon] = useState({})
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-
-  useEffect(() => {
-    const updateSize = () => setScreenWidth(window.innerWidth)
-    updateSize()
-
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
-  }, [screenWidth])
 
   const dispatch = useDispatch()
   const handleClick = () => pokemon.id && dispatch(setId(pokemon.id))
@@ -36,11 +27,7 @@ const EvolutionItem = ({ name, index }) => {
   }, [name])
 
   return (
-    <li
-      onClick={screenWidth > 580 ? handleClick : null}
-      onDoubleClick={screenWidth <= 580 ? handleClick : null}
-      className="evolution evolutions__evolution"
-    >
+    <li onClick={handleClick} className="evolution evolutions__evolution">
       <figure className="figure evolution__figure">
         {pokemon.sprites && (
           <img src={pokemon.sprites.front_default} alt="" className="figure__img" />

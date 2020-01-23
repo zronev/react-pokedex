@@ -27,6 +27,12 @@ const Pokedex = () => {
     const getTouches = e => e.touches
 
     const handleTouchStart = e => {
+      if (
+        e.target.className.includes('stage') ||
+        e.target.className.includes('evolution') ||
+        e.target.className.includes('figure')
+      ) return
+
       const firstTouch = getTouches(e)[0]
       xDown = firstTouch.clientX
       yDown = firstTouch.clientY
