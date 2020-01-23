@@ -5,12 +5,14 @@ import { saveToLocalStorage, loadFromLocalStorage } from './modules/localStorage
 
 const persistedState = loadFromLocalStorage()
 if (persistedState !== undefined) {
-  persistedState.id = 1
   persistedState.name = ''
-  persistedState.offset = 0
   persistedState.limit = 20
+  persistedState.offset = 0
   persistedState.side = false
   persistedState.menu = false
+  persistedState.search = false
+  persistedState.showLiked = false
+  persistedState.filterByTypes = []
 }
 
 const middleware = [thunk]
