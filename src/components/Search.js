@@ -1,20 +1,38 @@
-import React, { useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setName, dataToggleAction, setId } from '../actions'
+import { Link, useHistory } from 'react-router-dom'
 
-const Search = () => {
+const Search = ({ props }) => {
   const inputRef = useRef('')
-  const isOpen = useSelector(state => state.search)
   const dispatch = useDispatch()
+  let history = useHistory()
+
+  const isOpen = useSelector(state => state.search)
+  const name = useSelector(state => state.name)
+
+  // In the case we search by name
+  const [pokemonId, setPokemonId] = useState(null)
 
   const handleSubmit = e => {
     e.preventDefault()
 
+    if (Number(inputRef.current.value))
+      dispatch(setId(Number(inputRef.current.value.trim())))
+    else 
+      dispatch(setName(inputRef.current.value.toLowerCase().trim()))
+
+    inputRef.current.value = ''
+    dispatch(dataToggleAction('SEARCH'))
+    history.push('/')
+  }
+
+  const handleClick = () => {
     if (Number(inputRef.current.value)) {
       dispatch(setId(Number(inputRef.current.value.trim())))
     } else {
       dispatch(setName(inputRef.current.value.toLowerCase().trim()))
-      dispatch(dataToggleAction('SHOW_SEARCH_RESULT'))
+      pokemonId && dispatch(setId(pokemonId))
     }
 
     inputRef.current.value = ''
@@ -24,6 +42,27 @@ const Search = () => {
   const handleCloseClick = () => {
     dispatch(dataToggleAction('SEARCH'))
   }
+
+  useEffect(() => {
+    if (!name) return
+
+    const controller = new AbortController()
+    const url = name => `https://pokeapi.co/api/v2/pokemon/${name}/`
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url(name), { signal: controller.signal })
+        const data = await res.json()
+        setPokemonId(data.id)
+      } catch (e) {
+        console.log(`${e.name}: ${e.message}`)
+      }
+    }
+    fetchData()
+    dispatch(setId(pokemonId))
+
+    return () => controller.abort()
+  }, [dispatch, name, pokemonId])
 
   return (
     <div className={`search ${isOpen ? 'search--is-open' : ''}`}>
@@ -36,9 +75,9 @@ const Search = () => {
           required
         />
         <div className="search__buttons">
-          <button type="search" className="search__find button button--find">
+          <Link onClick={handleClick} className="search__find button button--find" to="/">
             Find
-          </button>
+          </Link>
           <button
             onClick={handleCloseClick}
             type="button"
