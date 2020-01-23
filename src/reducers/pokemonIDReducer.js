@@ -5,7 +5,8 @@ export const pokemonIDReducer = (state = 1, action) => {
     case 'PREV_POKEMON':
       return state !== 1 ? state - 1 : 802
     case 'SET_ID':
-      return action.payload
+      if (action.payload <= 802 && action.payload > 0) return action.payload
+      else return state
     default:
       return state
   }
