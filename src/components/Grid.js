@@ -74,15 +74,15 @@ const Grid = () => {
   const showLiked = useSelector(state => state.showLiked)
   const isLoaded = !!pokemonsData
 
-  const loadAll = isLoaded
-    ? pokemonsData.map((pokemon, index) => <Card key={index} url={pokemon.url} />)
-    : null
+  const loadAll =
+    isLoaded &&
+    pokemonsData.map((pokemon, index) => <Card key={index} url={pokemon.url} />)
 
-  const loadLiked = isLoaded
-    ? liked.map((id, index) => (
-        <Card key={index} url={`https://pokeapi.co/api/v2/pokemon/${id}`} />
-      ))
-    : null
+  const loadLiked =
+    isLoaded &&
+    liked.map((id, index) => (
+      <Card key={index} url={`https://pokeapi.co/api/v2/pokemon/${id}`} />
+    ))
 
   return (
     <div className="grid">
