@@ -5,9 +5,17 @@ import Sprite from './Sprite'
 import Spinner from './Spinner'
 import Like from './Like'
 import Id from './Id'
+import { Link } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { setId } from '../actions'
 
 const Card = ({ url }) => {
   const [pokemon, setPokemon] = useState()
+
+  const dispatch = useDispatch()
+  const handleClick = () => {
+    dispatch(setId(pokemon.id))
+  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -38,11 +46,13 @@ const Card = ({ url }) => {
             <Like id={pokemon.id} parent={'card'} />
           </header>
 
-          {pokemon.sprites ? (
-            <Sprite sprites={pokemon.sprites} parent={'card'} />
-          ) : (
-            <Spinner />
-          )}
+          <Link onClick={handleClick} to="/">
+            {pokemon.sprites ? (
+              <Sprite sprites={pokemon.sprites} parent={'card'} />
+            ) : (
+              <Spinner />
+            )}
+          </Link>
 
           <TypesList types={pokemon.types} />
           <AbilitiesList abilities={pokemon.abilities} parent={'card'} />
