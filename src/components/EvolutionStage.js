@@ -17,11 +17,7 @@ const EvolutionStage = ({ stage, index }) => {
       {stage.map((name, i) => (
         <div key={i} className="stage__pokemon">
           {!(index === 0 && i === 0) && (
-            <i
-              className={`stage__arrow fas ${
-                screenWidth > 580 ? 'fa-arrow-right' : 'fa-arrow-down'
-              }`}
-            />
+            <i className={`stage__arrow fas fa-arrow-down`} />
           )}
           <EvolutionItem name={name} index={`${index}.${i}`} />
         </div>

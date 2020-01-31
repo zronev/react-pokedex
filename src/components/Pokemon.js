@@ -6,15 +6,13 @@ import AbilitiesList from './AbilitiesList'
 import TypesList from './TypesList'
 import Stats from './Stats'
 import SpriteWithSwitcher from './SpriteWithSwitcher'
-import Chart from './Chart'
 import EvolutionList from './EvolutionList'
 import Like from './Like'
-import ToggleCharts from './ToggleCharts'
 import Id from './Id'
 
 const Pokemon = ({ pokemon }) => {
   const dispatch = useDispatch()
-  const chartType = useSelector(state => state.chartType)
+  const theme = useSelector(state => state.theme)
   const speciesData = useSelector(state => state.speciesData)
 
   const { name, id, abilities, types, stats, sprites, species } = pokemon
@@ -27,7 +25,7 @@ const Pokemon = ({ pokemon }) => {
   }, [dispatch, species.url])
 
   return (
-    <section className="pokemon">
+    <section className={`pokemon ${theme ? 'pokemon--night' : ''}`}>
       <p className="name pokemon__name">
         <Id id={id} />
         {` ${name}`}
@@ -40,10 +38,7 @@ const Pokemon = ({ pokemon }) => {
       <AbilitiesList abilities={abilities} parent={'pokemon'} />
       <TypesList types={types} />
 
-      {chartType && <Chart stats={stats} />}
-      {!chartType && <Stats stats={stats} />}
-
-      <ToggleCharts />
+      <Stats stats={stats} />
 
       {speciesData && speciesData.loaded ? (
         <EvolutionList species={speciesData.data} />

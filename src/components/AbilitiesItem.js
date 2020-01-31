@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 
-const AbilitiesItem = ({ ability }) => {
+const AbilitiesItem = ({ ability, parent }) => {
+  const theme = useSelector(state => state.theme)
+
   const [showDetail, setShowDetail] = useState(false)
   const [abilityData, setAbilityData] = useState({})
   const [screenWidth, setScreenWidth] = useState(window.innerWidth)
@@ -54,12 +57,18 @@ const AbilitiesItem = ({ ability }) => {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
-        className="ability abilities__ability"
+        className={`ability${parent === 'pokemon' ? '-main' : ''} ${
+          theme ? 'ability--night' : ''
+        } abilities__ability`}
       >
-        <span className="ability__name">
+        <span className={`ability${parent === 'pokemon' ? '-main' : ''}__name`}>
           {ability.name}
           {showDetail && (
-            <p className="ability__descr">
+            <p
+              className={`ability${parent === 'pokemon' ? '-main' : ''}__descr ${
+                theme ? `ability${parent === 'pokemon' ? '-main' : ''}__descr--night` : ''
+              }`}
+            >
               {abilityData.effect_entries && abilityData.effect_entries[0].short_effect}
             </p>
           )}

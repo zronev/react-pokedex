@@ -10,6 +10,7 @@ import FilterLiked from './FilterLiked'
 const Grid = () => {
   const dispatch = useDispatch()
 
+  const theme = useSelector(state => state.theme)
   const limit = useSelector(state => state.limit)
   const offset = useSelector(state => state.offset)
   const pokemons = useSelector(state => state.pokemons)
@@ -91,7 +92,7 @@ const Grid = () => {
         <i
           ref={arrowRef}
           onClick={handleArrowTopClick}
-          className="arrow-top fas fa-sort-up"
+          className={`arrow-top ${theme ? 'arrow-top--night' : ''} fas fa-arrow-up`}
           hidden
         />
         {showLiked && !pokemons.loading ? loadLiked : loadAll}

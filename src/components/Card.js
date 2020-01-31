@@ -6,10 +6,11 @@ import Spinner from './Spinner'
 import Like from './Like'
 import Id from './Id'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../actions'
 
 const Card = ({ url }) => {
+  const theme = useSelector(state => state.theme)
   const [pokemon, setPokemon] = useState()
 
   const dispatch = useDispatch()
@@ -34,7 +35,7 @@ const Card = ({ url }) => {
   }, [url])
 
   return (
-    <section className="card">
+    <section className={`card ${theme ? 'card--night' : ''}`}>
       {pokemon ? (
         <>
           <header className="card__header">
@@ -55,7 +56,7 @@ const Card = ({ url }) => {
           </Link>
 
           <TypesList types={pokemon.types} />
-          <AbilitiesList abilities={pokemon.abilities} parent={'card'} />
+          <AbilitiesList abilities={pokemon.abilities} />
         </>
       ) : null}
     </section>

@@ -66,15 +66,13 @@ const Pokedex = () => {
 
   return (
     <main>
-      {pokemon.loaded && (
-        <>
-          <div className="arrows">
-            <ArrowLeftPokemon />
-            <ArrowRightPokemon />
-          </div>
-          <Pokemon pokemon={pokemon.data} />
-        </>
-      )}
+      <>
+        <div className="arrows">
+          <ArrowLeftPokemon />
+          <ArrowRightPokemon />
+        </div>
+        {pokemon.loaded && <Pokemon pokemon={pokemon.data} />}
+      </>
 
       {pokemon.error && !pokemon.loaded && <p>Load Error</p>}
       {pokemon.loading && <Spinner />}

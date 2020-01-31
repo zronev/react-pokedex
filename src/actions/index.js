@@ -130,3 +130,4 @@ export const deleteFromLiked = id => ({
   type: 'DELETE_FROM_LIKED',
   payload: id,
 })
+

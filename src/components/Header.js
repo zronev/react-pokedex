@@ -1,12 +1,14 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { dataToggleAction } from '../actions'
 import { Link } from 'react-router-dom'
 
 import Pokeball from './Pokeball'
+import ThemeSwitcher from './ThemeSwitcher'
 
 const Header = () => {
   const dispatch = useDispatch()
+  const theme = useSelector(state => state.theme)
 
   const handleMenuClick = () => {
     dispatch(dataToggleAction('menu'))
@@ -25,14 +27,14 @@ const Header = () => {
         </Link>
       </h1>
       <Pokeball />
-      <button
-        onClick={handleMenuClick}
-        className="header__menu-open menu-open"
-      >
+      <button onClick={handleMenuClick} className="header__menu-open menu-open">
         <i className="fas fa-bars" />
       </button>
 
-      <i onClick={handleSearchClick} className="header__go-to-search fas fa-search" />
+      <div className={`header__right-bar ${theme ? 'header__right-bar--night' : ''}`}>
+        <i onClick={handleSearchClick} className="header__go-to-search fas fa-search" />
+        <ThemeSwitcher />
+      </div>
     </header>
   )
 }

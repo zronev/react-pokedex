@@ -3,11 +3,12 @@ import { useDispatch, useSelector } from 'react-redux'
 import { setName, dataToggleAction, setId } from '../actions'
 import { Link, useHistory } from 'react-router-dom'
 
-const Search = ({ props }) => {
+const Search = () => {
   const inputRef = useRef('')
   const dispatch = useDispatch()
   let history = useHistory()
 
+  const theme = useSelector(state => state.theme)
   const isOpen = useSelector(state => state.search)
   const name = useSelector(state => state.name)
 
@@ -19,15 +20,14 @@ const Search = ({ props }) => {
 
     if (Number(inputRef.current.value))
       dispatch(setId(Number(inputRef.current.value.trim())))
-    else 
-      dispatch(setName(inputRef.current.value.toLowerCase().trim()))
+    else dispatch(setName(inputRef.current.value.toLowerCase().trim()))
 
     inputRef.current.value = ''
     dispatch(dataToggleAction('SEARCH'))
     history.push('/')
   }
 
-  const handleClick = () => {
+  const handleSearchClick = () => {
     if (Number(inputRef.current.value)) {
       dispatch(setId(Number(inputRef.current.value.trim())))
     } else {
@@ -36,6 +36,12 @@ const Search = ({ props }) => {
     }
 
     inputRef.current.value = ''
+    dispatch(dataToggleAction('SEARCH'))
+  }
+
+  const handleRandomClick = () => {
+    const randomId = Math.floor(Math.random() * 807)
+    dispatch(setId(randomId))
     dispatch(dataToggleAction('SEARCH'))
   }
 
@@ -66,24 +72,38 @@ const Search = ({ props }) => {
 
   return (
     <div className={`search ${isOpen ? 'search--is-open' : ''}`}>
-      <form onSubmit={handleSubmit} className={`search__form`}>
+      <form
+        onSubmit={handleSubmit}
+        className={`search__form ${theme ? 'search__form--night' : ''}`}
+      >
         <input
           ref={inputRef}
           type="search"
-          className="search__input"
-          placeholder="Type a pokemon name or id..."
+          className={`search__input ${theme ? 'search__input--night' : ''}`}
+          placeholder="Type a pokemon's name or id..."
           required
         />
         <div className="search__buttons">
-          <Link onClick={handleClick} className="search__find button button--find" to="/">
-            Find
+          <Link
+            onClick={handleRandomClick}
+            className="search__random button button--random"
+            to="/"
+          >
+            <span role="img" aria-label="random">🎲</span> 
+          </Link>
+          <Link
+            onClick={handleSearchClick}
+            className="search__find button button--find"
+            to="/"
+          >
+            <span role="img" aria-label="find">🔍</span>
           </Link>
           <button
             onClick={handleCloseClick}
             type="button"
             className="search__close button button--close"
           >
-            Close
+            <span role="img" aria-label="close">❌</span>
           </button>
         </div>
       </form>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../actions'
 
 const EvolutionItem = ({ name, index }) => {
+  const theme = useSelector(state => state.theme)
   const [pokemon, setPokemon] = useState({})
 
   const dispatch = useDispatch()
@@ -27,7 +28,10 @@ const EvolutionItem = ({ name, index }) => {
   }, [name])
 
   return (
-    <li onClick={handleClick} className="evolution evolutions__evolution">
+    <li
+      onClick={handleClick}
+      className={`evolution ${theme ? 'evolution--night' : ''} evolutions__evolution`}
+    >
       <figure className="figure evolution__figure">
         {pokemon.sprites && (
           <img src={pokemon.sprites.front_default} alt="" className="figure__img" />
