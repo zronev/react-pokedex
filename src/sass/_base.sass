@@ -1,7 +1,11 @@
 body
-  font-size: calc(12px + .35vw)
   color: $main-color
+  font-size: calc(12px + .35vw)
   font-family: 'Open Sans', Arial, sans-serif
+  transition: background-color 0.3s, color 0.3s;
+
+  @media screen and ( max-width:  375px)
+    font-size: 14px
 
 button
   padding: 0

@@ -1,12 +1,9 @@
 $border-radius: 9px
 
-$search-z-index: 10000
-$menu-z-index: 10000
-$overlay-z-index: 1000
-$ability-z-index: 100
-
 // Don't use this
 $white-color: #fff
+$light-color: #ecf0f1
+$dark-color: #2c3e50
 $black-color: #2d3436
 $dark-red-color: #eb4d4b
 $red-color: #ff7675
@@ -29,35 +26,71 @@ $pink-color: #fd79a8
 $light-pink-color: #ffcccc
 
 // Use this
+
+// Main colors
 $main-color: $black-color
 $prime-color: $red-color
 $second-color: $light-blue-color
 
+// Utility
+$border-color: $red-color
+$shadow-color: $grey-color-rgba
+$box-shadow: 0 2px 10px rgba(0,0,0,0.15)
+
+// z-indexes
+$search-z-index: 10000
+$menu-z-index: 10000
+$ability-descr-z-index: 9999
+$utility-bar-z-index: 9999
+$overlay-z-index: 9990
+$progress-z-index: 9000
+$about-descr-z-index: 1000
+$ability-z-index: 100
+
+// Theme
+$sun-color: $yellow-color
+$moon-color: $dark-purple
+
+$dark-theme-color: $light-color
+$dark-theme-background-color: $dark-color
+$dark-theme-box-shadow: 0 2px 10px rgba(255,255,255,0.15)
+
+// Link
 $link-icon-color: $grey-color
 $link-color: $blue-color
-$search-color: $blue-color
-$close-color: $red-color
-
 $github-color: $black-color
 
-$toggle-background: $light-grey-color
-
-$arrow-color: $grey-color
-$arrow-top-color: $prime-color
+// Button colors
+$search-color: $blue-color
+$close-color: $red-color
 $button-default-color: $beige-color
 $switch-color: $grey-color
 
+$toggle-background: $light-grey-color
+
+// Arrow
+$arrow-color: $grey-color
+$arrow-top-color: $prime-color
+
+// Ability
 $ability-color: $light-grey-color
-$border-ability-color: $dark-blue-color
 
-$border-color: $red-color
-$shadow-color: $grey-color-rgba
-
+// Pokeball
 $pokeball-border-color: $black-color
 $pokeball-shadow-color: $light-grey-color
 $pokeball-high-part-color: $red-color
-$pokeball-low-part-color: white
+$pokeball-low-part-color: $white-color
 $pokeball-button-color: $grey-color
+
+// Stats color
+$stat-background-color: lighten($grey-color, 20%)
+$stat--50-max: $green-color
+$stat--75-max: $blue-color
+$stat--100-max: $beige-color
+$stat--150-max: $yellow-color
+$stat--200-max: $dark-yellow-color
+$stat--250-max: $red-color
+$stat--275-max: $dark-red-color
 
 // Types color
 $normal-color: $grey-color

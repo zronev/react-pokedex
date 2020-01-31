@@ -13,7 +13,7 @@
     cursor: pointer
     border-bottom: 6px dotted transparent
 
-    transition: all 0.3s
+    transition: all 0.1s
 
     &_poke
       color: $prime-color
@@ -26,17 +26,37 @@
     left: 2%
     margin-left: 0.8rem
 
-  &__go-to-search
-    position: absolute
+  &__right-bar
+    position: fixed
+    top: 5%
     right: 2%
-    margin-right: 0.8rem
 
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+    padding: 1rem 0.8rem
+    border-radius: 25px
+    background: $white-color
+    box-shadow: $box-shadow
+
+    z-index: $utility-bar-z-index
+
+    &--night
+      background: $dark-theme-background-color
+      box-shadow: $dark-theme-box-shadow
+
+  &__theme-switcher
+    margin-top: 0.6rem
+
+  &__go-to-search
     font-size: 1.5em
-    color: $main-color
+    color: inherit
     cursor: pointer
 
-    transition: all 0.25s
+    transition: all 0.1s
 
     &:hover
       color: $search-color
-      transform: scale(1.2)
+      transform: scale(1.05)

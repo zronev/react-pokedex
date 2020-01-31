@@ -1,0 +1,44 @@
+.stat
+  width: 100%
+
+  &__progress
+    -webkit-appearance: none
+    appearance: none
+
+    width: 100%
+    position: relative
+    border-radius: $border-radius
+
+    z-index: $progress-z-index
+    overflow: hidden
+
+    &::-webkit-progress-bar
+      background: $stat-background-color
+
+  &--50-max
+    &::-webkit-progress-value
+      background: $stat--50-max
+
+  &--75-max
+    &::-webkit-progress-value
+      background: $stat--75-max
+
+  &--100-max
+    &::-webkit-progress-value
+      background: $stat--100-max
+
+  &--150-max
+    &::-webkit-progress-value
+      background: $stat--150-max
+
+  &--200-max
+    &::-webkit-progress-value
+      background: $stat--200-max
+
+  &--250-max
+    &::-webkit-progress-value
+      background: $stat--250-max
+
+  &--275-max
+    &::-webkit-progress-value
+      background: $stat--275-max

@@ -3,9 +3,12 @@
 
   &__image
     min-height: 12.5rem
-    border: 3px solid white
+    border: 3px solid inherit
     border-radius: $border-radius
-    box-shadow: 0 1px 5px rgba(0,0,0,0.25)
+    box-shadow: $box-shadow
+
+    &--night
+      box-shadow: $dark-theme-box-shadow
 
   &__no-image
     display: flex
@@ -19,16 +22,17 @@
 
     border: 3px solid white
     border-radius: $border-radius
-    box-shadow: 0 1px 5px rgba(0,0,0,0.25)
+    box-shadow: $box-shadow
+
+    &--night
+      box-shadow: $dark-theme-box-shadow
 
   &__emoji
     margin-left: 0.3rem
 
   &__switch-side
     position: absolute
-    top: 7%
-    right: 5%
-    transform: translate(-7%, -5%)
+    transform: translate(-150%, 75%)
 
     cursor: pointer
 
@@ -46,6 +50,6 @@
 
   @keyframes rotate
     from
-      transform: rotate(0)
+      transform: translate(-150%, 75%) rotate(0) 
     to
-      transform: rotate(360deg)
+      transform: translate(-150%, 75%) rotate(360deg) 
