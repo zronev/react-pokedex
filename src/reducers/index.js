@@ -21,6 +21,8 @@ const menu = toggleDataReducer('menu')
 const showLiked = toggleDataReducer('showLiked')
 const search = toggleDataReducer('SEARCH')
 const showSearchResult = toggleDataReducer('SHOW_SEARCH_RESULT')
+const showFilteredResult = toggleDataReducer('SHOW_FILTERED_RESULT')
+const theme = toggleDataReducer('TOGGLE_THEME')
 
 const id = pokemonIDReducer
 const name = setNameReducer
@@ -39,8 +41,10 @@ export const rootReducer = combineReducers({
   offset,
   limit,
   search,
+  theme,
   showLiked,
   showSearchResult,
+  showFilteredResult,
   menu,
   chartType,
   side,
