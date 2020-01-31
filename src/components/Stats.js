@@ -1,73 +1,49 @@
 import React, { useState, useEffect } from 'react'
-import { HorizontalBar } from 'react-chartjs-2'
+import Stat from './Stat'
+import { useSelector } from 'react-redux'
 
 const Stats = ({ stats }) => {
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth)
-  const [chartWidth, setChartWidth] = useState(350)
+  const [maxStat, setMaxStat] = useState(0)
+  const night = useSelector(state => state.theme)
 
   useEffect(() => {
-    const updateSize = () => {
-      setScreenWidth(window.innerWidth)
+    let max = 0
+    for (let stat of stats) {
+      if (stat.base_stat > max) max = stat.base_stat
     }
-    updateSize()
 
-    switch (screenWidth) {
-      case screenWidth <= 458:
-        setChartWidth(275)
+    switch (true) {
+      case max > 250:
+        setMaxStat(275)
         break
-      case screenWidth <= 768:
-        setChartWidth(350)
+      case max > 200:
+        setMaxStat(250)
         break
-      case screenWidth <= 1024:
-        setChartWidth(400)
+      case max > 150:
+        setMaxStat(200)
         break
-      case screenWidth <= 1440:
-        setChartWidth(450)
+      case max > 100:
+        setMaxStat(150)
         break
-
+      case max > 75:
+        setMaxStat(100)
+        break
+      case max > 50:
+        setMaxStat(75)
+        break
       default:
-        setChartWidth(350)
+        setMaxStat(50)
     }
-
-    window.addEventListener('resize', updateSize)
-    return () => window.removeEventListener('resize', updateSize)
-  }, [screenWidth])
-
-  const baseStats = stats.map(stat => stat.base_stat)
-  const statsNames = stats.map(stat => stat.stat.name)
-
-  const options = {
-    legend: {
-      display: false,
-    },
-    maintainAspectRatio: false,
-  }
-
-  const data = {
-    labels: statsNames,
-    datasets: [
-      {
-        label: 'Stats',
-        backgroundColor: 'rgba(179,181,198,0.2)',
-        borderColor: '#eb4d4b',
-        borderWidth: '3',
-        pointBackgroundColor: '#eb4d4b',
-        pointBorderColor: '#fff',
-        pointHoverBackgroundColor: '#fff',
-        pointHoverBorderColor: '#eb4d4b',
-        data: baseStats,
-      },
-    ],
-  }
+  }, [stats])
 
   return (
-    <div className="chart chart--stats pokemon__chart ">
-      <HorizontalBar
-        data={data}
-        width={chartWidth}
-        height={chartWidth}
-        options={options}
-      />
+    <div className="stats  pokemon__stats">
+      <h2 className="stats__title">Base stats</h2>
+      <div className={`stats__bars ${night ? 'stats__bars--night' : ''}`}>
+        {stats.map((stat, index) => (
+          <Stat key={index} stat={stat} max={maxStat} />
+        ))}
+      </div>
     </div>
   )
 }
