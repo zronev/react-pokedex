@@ -58,7 +58,7 @@ const AbilitiesItem = ({ ability, parent }) => {
         onMouseLeave={handleMouseLeave}
         onClick={handleClick}
         className={`ability${parent === 'pokemon' ? '-main' : ''} ${
-          theme ? 'ability--night' : ''
+          theme ? `ability${parent === 'pokemon' ? '-main' : ''}--night` : ''
         } abilities__ability`}
       >
         <span className={`ability${parent === 'pokemon' ? '-main' : ''}__name`}>
