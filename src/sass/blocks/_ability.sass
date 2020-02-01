@@ -1,4 +1,9 @@
 .ability
+  &--night
+    color: inherit
+    background: $prime-color
+    box-shadow: $dark-theme-box-shadow
+
   &__name
     position: relative
     cursor: pointer
@@ -17,6 +22,11 @@
     background: $white-color
     border-radius: $border-radius
     box-shadow: $box-shadow
+
+    &--night
+      color: inherit
+      background: $dark-theme-background-color
+      box-shadow: $dark-theme-box-shadow
 
     @media screen and ( max-width: 1024px)
       position: fixed
