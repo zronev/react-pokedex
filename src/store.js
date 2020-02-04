@@ -12,7 +12,6 @@ if (persistedState !== undefined) {
   persistedState.menu = false
   persistedState.search = false
   persistedState.showLiked = false
-  persistedState.filterByTypes = []
 }
 
 const middleware = [thunk]
