@@ -9,6 +9,7 @@ import { loadPokemonReducer } from './loadPokemonReducer'
 import { loadPokemonsReducer } from './loadPokemonsReducer'
 import { loadSpeciesReducer } from './loadSpeciesReducer'
 import { loadEvolutionReducer } from './loadEvolutionReducer'
+import { comparedReducer } from './comparedReducer'
 
 const pokemons = loadPokemonsReducer
 const pokemon = loadPokemonReducer
@@ -29,6 +30,7 @@ const name = setNameReducer
 const offset = offsetReducer
 const limit = limitReducer
 const liked = likedReducer
+const toCompare = comparedReducer
 
 export const rootReducer = combineReducers({
   pokemons,
@@ -48,4 +50,5 @@ export const rootReducer = combineReducers({
   menu,
   chartType,
   side,
+  toCompare,
 })

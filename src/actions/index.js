@@ -131,3 +131,12 @@ export const deleteFromLiked = id => ({
   payload: id,
 })
 
+export const addToСompared = id => ({
+  type: 'ADD_TO_COMPARED',
+  payload: id,
+})
+
+export const deleteFromСompared = id => ({
+  type: 'DELETE_FROM_COMPARED',
+  payload: id,
+})
