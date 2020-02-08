@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setId } from '../actions'
+import classNames from 'classnames'
 
 const EvolutionItem = ({ name, index }) => {
   const theme = useSelector(state => state.theme)
@@ -27,10 +28,16 @@ const EvolutionItem = ({ name, index }) => {
     return () => controller.abort()
   }, [name])
 
+  const liClass = classNames({
+    evolution: true,
+    'evolution--night': theme,
+    evolutions__evolution: true,
+  })
+
   return (
     <li
       onClick={handleClick}
-      className={`evolution ${theme ? 'evolution--night' : ''} evolutions__evolution`}
+      className={liClass}
     >
       <figure className="figure evolution__figure">
         {pokemon.sprites && (

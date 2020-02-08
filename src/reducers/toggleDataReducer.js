@@ -5,11 +5,9 @@ export const toggleDataReducer = stateProperty => {
     switch (action.type) {
       case TOGGLE(stateProperty):
         return !state
-
       default:
         return state
     }
   }
-
   return reducer
 }

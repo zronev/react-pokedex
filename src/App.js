@@ -8,11 +8,12 @@ import Grid from './components/Grid'
 import Favorites from './components/Favorites'
 import About from './components/About'
 import Search from './components/Search'
+import Compare from './components/Compare'
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      <>
         <Header />
         <Menu />
         <Search />
@@ -20,6 +21,10 @@ function App() {
         <Switch>
           <Route exact path="/">
             <Pokedex />
+          </Route>
+
+          <Route exact path="/compare">
+            <Compare />
           </Route>
 
           <Route path="/grid">
@@ -34,7 +39,7 @@ function App() {
             <About />
           </Route>
         </Switch>
-      </div>
+      </>
     </Router>
   )
 }

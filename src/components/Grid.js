@@ -9,13 +9,12 @@ import FilterLiked from './FilterLiked'
 
 const Grid = () => {
   const dispatch = useDispatch()
+  const arrowRef = useRef()
 
   const theme = useSelector(state => state.theme)
   const limit = useSelector(state => state.limit)
   const offset = useSelector(state => state.offset)
   const pokemons = useSelector(state => state.pokemons)
-
-  const arrowRef = useRef()
 
   const [pokemonsData, setPokemonsData] = useState()
   const [screenHeight, setScreenHeight] = useState(window.innerHeight)
@@ -104,7 +103,7 @@ const Grid = () => {
           onClick={handleShowMoreClick}
           className="button button--show-more grid__button"
         >
-          Show More
+          {pokemons.loaded ? 'Show More' : 'Loading...'}
         </button>
       )}
       {pokemons.loading && <Spinner />}

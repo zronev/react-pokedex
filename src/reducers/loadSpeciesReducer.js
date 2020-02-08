@@ -1,6 +1,7 @@
 const initialState = {
   data: {},
   loading: false,
+  loaded: false,
   error: '',
 }
 
@@ -13,7 +14,6 @@ export const loadSpeciesReducer = (state = initialState, action) => {
         loaded: false,
         error: null,
       }
-
     case 'SET_DATA_SPECIES':
       return {
         ...state,
@@ -21,7 +21,6 @@ export const loadSpeciesReducer = (state = initialState, action) => {
         loading: false,
         loaded: true,
       }
-
     case 'LOADING_ERROR_SPECIES':
       return {
         ...state,
@@ -29,7 +28,6 @@ export const loadSpeciesReducer = (state = initialState, action) => {
         loaded: false,
         error: action.error,
       }
-
     default:
       return state
   }

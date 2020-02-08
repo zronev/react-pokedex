@@ -1,18 +1,28 @@
 import React, { useState } from 'react'
+import classNames from 'classnames'
 
 const Pokeball = () => {
   const [isAnimated, setIsAnimated] = useState(false)
   const handleOnClick = () => setIsAnimated(true)
 
+  const pokeballClass = classNames({
+    pokeball: true,
+    'pokeball--animated': isAnimated,
+    header__pokeball: true,
+  })
+
+  const pokeballButtonClass = classNames({
+    pokeball__button: true,
+    'pokeball__button--animated': isAnimated,
+  })
+
   return (
     <div
       onClick={handleOnClick}
       onAnimationEnd={() => setIsAnimated(false)}
-      className={`pokeball ${isAnimated ? 'pokeball--animated' : ''} header__pokeball`}
+      className={pokeballClass}
     >
-      <div
-        className={`pokeball__button ${isAnimated ? 'pokeball__button--animated' : ''}`}
-      />
+      <div className={pokeballButtonClass} />
     </div>
   )
 }

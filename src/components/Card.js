@@ -1,22 +1,21 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { setId } from '../actions'
+import classNames from 'classnames'
+
 import TypesList from './TypesList'
 import AbilitiesList from './AbilitiesList'
 import Sprite from './Sprite'
 import Spinner from './Spinner'
 import Like from './Like'
 import Id from './Id'
-import { Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import { setId } from '../actions'
 
 const Card = ({ url }) => {
+  const dispatch = useDispatch()
+
   const theme = useSelector(state => state.theme)
   const [pokemon, setPokemon] = useState()
-
-  const dispatch = useDispatch()
-  const handleClick = () => {
-    dispatch(setId(pokemon.id))
-  }
 
   useEffect(() => {
     const controller = new AbortController()
@@ -34,13 +33,20 @@ const Card = ({ url }) => {
     return () => controller.abort()
   }, [url])
 
+  const handleClick = () => dispatch(setId(pokemon.id))
+
+  const sectionClass = classNames({
+    card: true,
+    'card--night': theme,
+  })
+
   return (
-    <section className={`card ${theme ? 'card--night' : ''}`}>
+    <section className={sectionClass}>
       {pokemon ? (
         <>
           <header className="card__header">
             <p className="name card__name">
-              <Id id={pokemon.id} />
+              <Id id={pokemon.id} parent="card" />
               {` ${pokemon.name}`}
             </p>
 
@@ -56,7 +62,7 @@ const Card = ({ url }) => {
           </Link>
 
           <TypesList types={pokemon.types} />
-          <AbilitiesList abilities={pokemon.abilities} />
+          <AbilitiesList abilities={pokemon.abilities} parent="card" />
         </>
       ) : null}
     </section>

@@ -5,14 +5,12 @@ import { setName } from '../actions'
 import Spinner from './Spinner'
 
 const SearchResult = () => {
-  const name = useSelector(state => state.name)
   const dispatch = useDispatch()
 
+  const name = useSelector(state => state.name)
   const [pokemon, setPokemon] = useState(null)
 
-  const handleClick = () => {
-    dispatch(setName(''))
-  }
+  const handleClick = () => dispatch(setName(''))
 
   const fetchData = useCallback(async () => {
     try {

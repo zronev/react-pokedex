@@ -7,13 +7,11 @@ const ArrowLeftPokemon = () => {
   const dispatch = useDispatch()
   const id = useSelector(state => state.id)
 
-  const handleClick = () => {
-    dispatch(prevPokemon(id))
-  }
+  const handleClick = () => dispatch(prevPokemon(id))
 
   const handleKeyDown = useCallback(
     e => {
-      if (e.keyCode === 37) dispatch(prevPokemon(id))
+      e.keyCode === 37 && dispatch(prevPokemon(id))
     },
     [dispatch, id],
   )

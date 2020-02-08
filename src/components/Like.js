@@ -4,17 +4,12 @@ import { addToLiked, deleteFromLiked } from '../actions'
 
 const Like = ({ id, parent }) => {
   const dispatch = useDispatch()
-  const liked = useSelector(state => state.liked)
 
+  const liked = useSelector(state => state.liked)
   const [isLiked, setIsLiked] = useState(false)
 
-  const handleLikeClick = () => {
-    dispatch(addToLiked(id))
-  }
-
-  const handleDislikeClick = () => {
-    dispatch(deleteFromLiked(id))
-  }
+  const handleLikeClick = () => dispatch(addToLiked(id))
+  const handleDislikeClick = () => dispatch(deleteFromLiked(id))
 
   useEffect(() => {
     setIsLiked(liked.includes(id))
@@ -23,7 +18,10 @@ const Like = ({ id, parent }) => {
   return (
     <>
       {isLiked ? (
-        <button onClick={handleDislikeClick} className={`like like--active ${parent}__like`}>
+        <button
+          onClick={handleDislikeClick}
+          className={`like like--active ${parent}__like`}
+        >
           <i className="fas fa-heart" />
         </button>
       ) : (

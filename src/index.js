@@ -7,7 +7,6 @@ import { store } from './store'
 import 'normalize.css'
 import './sass/main.sass'
 
-
 ReactDOM.render(
   <Provider store={store}>
     <App />

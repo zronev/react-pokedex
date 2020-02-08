@@ -7,9 +7,7 @@ const ArrowRightPokemon = () => {
   const dispatch = useDispatch()
   const id = useSelector(state => state.id)
 
-  const handleClick = () => {
-    dispatch(nextPokemon(id))
-  }
+  const handleClick = () => dispatch(nextPokemon(id))
 
   const handleKeyDown = useCallback(
     e => {

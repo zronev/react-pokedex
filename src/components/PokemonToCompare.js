@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import classNames from 'classnames'
 
 import Id from './Id'
 import Like from './Like'
@@ -13,6 +14,7 @@ import Stats from './Stats'
 const PokemonToCompare = ({ id }) => {
   const [pokemon, setPokemon] = useState()
 
+  const theme = useSelector(state => state.theme)
   const toCompare = useSelector(state => state.toCompare)
   const isPokemonInCompared = toCompare.includes(id)
 
@@ -34,10 +36,15 @@ const PokemonToCompare = ({ id }) => {
     return () => controller.abort()
   }, [id])
 
+  const pokemonClass = classNames({
+    'pokemon-to-compare': true,
+    'pokemon-to-compare--night': theme,
+  })
+
   return (
     <>
       {pokemon && pokemon.id ? (
-        <section className="pokemon-to-compare">
+        <section className={pokemonClass}>
           <header className="pokemon-to-compare__header">
             <p className="name pokemon-to-compare__name">
               <Id id={pokemon.id} parent="pokemon-to-compare" />

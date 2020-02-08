@@ -1,7 +1,6 @@
 export const saveToLocalStorage = state => {
   // Using try/catch because of different privacy
   // settings from one user to another
-
   try {
     const serializedState = JSON.stringify(state)
     localStorage.setItem('state', serializedState)

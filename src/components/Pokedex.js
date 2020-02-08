@@ -6,18 +6,20 @@ import Spinner from './Spinner'
 import Pokemon from './Pokemon'
 import ArrowLeftPokemon from './ArrowLeftPokemon'
 import ArrowRightPokemon from './ArrowRightPokemon'
+import GoToCompare from './GoToCompare'
 
 const Pokedex = () => {
+  const dispatch = useDispatch()
   const id = useSelector(state => state.id)
   const pokemon = useSelector(state => state.pokemon)
-  const dispatch = useDispatch()
+  const toCompare = useSelector(state => state.toCompare)
 
   useEffect(() => {
     const controller = new AbortController()
     dispatch(loadPokemon(id, controller))
 
     return () => controller.abort()
-  }, [dispatch, id])
+  }, [id])
 
   useEffect(() => {
     // https://stackoverflow.com/questions/2264072/detect-a-finger-swipe-through-javascript-on-the-iphone-and-android
@@ -27,11 +29,12 @@ const Pokedex = () => {
     const getTouches = e => e.touches
 
     const handleTouchStart = e => {
-      if (
-        e.target.className.includes('stage') ||
-        e.target.className.includes('evolution') ||
-        e.target.className.includes('figure')
-      ) return
+      const sectionClassName = e.target.className
+      const sectionToIgnore =
+        sectionClassName.includes('stage') ||
+        sectionClassName.includes('evolution') ||
+        sectionClassName.includes('figure')
+      if (sectionToIgnore) return
 
       const firstTouch = getTouches(e)[0]
       xDown = firstTouch.clientX
@@ -62,7 +65,7 @@ const Pokedex = () => {
       document.removeEventListener('touchstart', handleTouchStart, false)
       document.removeEventListener('touchmove', handleTouchMove, false)
     }
-  }, [dispatch])
+  })
 
   return (
     <main>
@@ -76,6 +79,7 @@ const Pokedex = () => {
 
       {pokemon.error && !pokemon.loaded && <p>Load Error</p>}
       {pokemon.loading && <Spinner />}
+      {toCompare.length > 0 && <GoToCompare />}
     </main>
   )
 }

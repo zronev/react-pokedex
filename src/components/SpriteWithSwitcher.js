@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Sprite from './Sprite'
 
-const SpriteWithSwitcher = ({ sprites }) => {
+const SpriteWithSwitcher = ({ sprites, parent }) => {
   const [side, setSide] = useState(false)
   const [rotate, setRotate] = useState(false)
 
@@ -11,8 +11,8 @@ const SpriteWithSwitcher = ({ sprites }) => {
   }
 
   return (
-    <div className="sprite pokemon__sprite">
-      <Sprite side={side} sprites={sprites} />
+    <div className={`sprite ${parent}__sprite`}>
+      <Sprite side={side} sprites={sprites} parent={parent} />
       <i
         onClick={handleClick}
         onAnimationEnd={() => setRotate(false)}

@@ -14,7 +14,6 @@ export const loadPokemonsReducer = (state = initialState, action) => {
         loaded: false,
         error: null,
       }
-
     case 'SET_DATA_POKEMONS':
       return {
         ...state,
@@ -22,7 +21,6 @@ export const loadPokemonsReducer = (state = initialState, action) => {
         loading: false,
         loaded: true,
       }
-
     case 'LOADING_ERROR_POKEMONS':
       return {
         ...state,
@@ -30,7 +28,6 @@ export const loadPokemonsReducer = (state = initialState, action) => {
         loaded: false,
         error: action.error,
       }
-
     default:
       return state
   }

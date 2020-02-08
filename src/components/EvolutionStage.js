@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import EvolutionItem from './EvolutionItem'
 
 const EvolutionStage = ({ stage, index }) => {
@@ -16,9 +17,7 @@ const EvolutionStage = ({ stage, index }) => {
     <ul className="stage evolutions__stage">
       {stage.map((name, i) => (
         <div key={i} className="stage__pokemon">
-          {!(index === 0 && i === 0) && (
-            <i className={`stage__arrow fas fa-arrow-down`} />
-          )}
+          {!(index === 0 && i === 0) && <i className="stage__arrow fas fa-arrow-down" />}
           <EvolutionItem name={name} index={`${index}.${i}`} />
         </div>
       ))}

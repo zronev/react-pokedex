@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Stat from './Stat'
 import { useSelector } from 'react-redux'
 
-const Stats = ({ stats }) => {
+const Stats = ({ stats, parent }) => {
   const [maxStat, setMaxStat] = useState(0)
   const night = useSelector(state => state.theme)
 
@@ -37,9 +37,13 @@ const Stats = ({ stats }) => {
   }, [stats])
 
   return (
-    <div className="stats  pokemon__stats">
-      <h2 className="stats__title">Base stats</h2>
-      <div className={`stats__bars ${night ? 'stats__bars--night' : ''}`}>
+    <div className={`stats ${parent}__stats`}>
+      {parent === 'pokemon' ? <h2 className="stats__title">Base stats</h2> : null}
+      <div
+        className={`stats__bars stats__bars--${parent} ${
+          night ? 'stats__bars--night' : ''
+        }`}
+      >
         {stats.map((stat, index) => (
           <Stat key={index} stat={stat} max={maxStat} />
         ))}

@@ -8,9 +8,7 @@ const Menu = () => {
   const dispatch = useDispatch()
   const isOpen = useSelector(state => state.menu)
 
-  const handleClick = () => {
-    dispatch(dataToggleAction('menu'))
-  }
+  const handleClick = () => dispatch(dataToggleAction('menu'))
 
   return (
     <>
