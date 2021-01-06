@@ -44,7 +44,7 @@
   },
   "devDependencies": {
     "gzipper": "^3.4.2",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "normalize.css": "^8.0.1"
   }
 }
